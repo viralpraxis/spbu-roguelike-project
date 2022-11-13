@@ -48,20 +48,30 @@ public class Renderer {
 
         TerminalPosition labelBoxTopLeft = new TerminalPosition(room.getX(), room.getY());
         TerminalSize labelBoxSize = new TerminalSize(room.getSize(), room.getSize());
-        TerminalPosition labelBoxTopRightCorner = labelBoxTopLeft.withRelativeColumn(labelBoxSize.getColumns() - 1);
+        TerminalPosition labelBoxTopRightCorner = labelBoxTopLeft.withRelativeColumn(labelBoxSize.getColumns()-1);
         TextGraphics textGraphics = screen.newTextGraphics();
         //This isn't really needed as we are overwriting everything below anyway, but just for demonstrative purpose
         textGraphics.fillRectangle(labelBoxTopLeft, labelBoxSize, ' ');
 
-        textGraphics.drawLine(labelBoxTopLeft.withRelativeColumn(1), labelBoxTopLeft.withRelativeColumn(labelBoxSize.getColumns() - 2), Symbols.DOUBLE_LINE_HORIZONTAL);
-        textGraphics.drawLine(labelBoxTopLeft.withRelativeRow(2).withRelativeColumn(1), labelBoxTopLeft.withRelativeRow(2).withRelativeColumn(labelBoxSize.getColumns() - 2), Symbols.DOUBLE_LINE_HORIZONTAL);
+        textGraphics.drawLine(labelBoxTopLeft.withRelativeColumn(1),
+                labelBoxTopLeft.withRelativeColumn(labelBoxSize.getColumns()-1),
+                Symbols.DOUBLE_LINE_HORIZONTAL);
+        textGraphics.drawLine(labelBoxTopLeft.withRelativeRow(room.getSize()-1).withRelativeColumn(1),
+                labelBoxTopLeft.withRelativeRow(room.getSize()-1).withRelativeColumn(labelBoxSize.getColumns()-1),
+                Symbols.DOUBLE_LINE_HORIZONTAL);
 
         textGraphics.setCharacter(labelBoxTopLeft, Symbols.DOUBLE_LINE_TOP_LEFT_CORNER);
-        textGraphics.setCharacter(labelBoxTopLeft.withRelativeRow(1), Symbols.DOUBLE_LINE_VERTICAL);
-        textGraphics.setCharacter(labelBoxTopLeft.withRelativeRow(2), Symbols.DOUBLE_LINE_BOTTOM_LEFT_CORNER);
+        textGraphics.setCharacter(labelBoxTopLeft.withRelativeRow(room.getSize()-1),
+                                  Symbols.DOUBLE_LINE_BOTTOM_LEFT_CORNER);
+
         textGraphics.setCharacter(labelBoxTopRightCorner, Symbols.DOUBLE_LINE_TOP_RIGHT_CORNER);
-        textGraphics.setCharacter(labelBoxTopRightCorner.withRelativeRow(1), Symbols.DOUBLE_LINE_VERTICAL);
-        textGraphics.setCharacter(labelBoxTopRightCorner.withRelativeRow(2), Symbols.DOUBLE_LINE_BOTTOM_RIGHT_CORNER);
+        textGraphics.setCharacter(labelBoxTopRightCorner.withRelativeRow(room.getSize()-1),
+                                  Symbols.DOUBLE_LINE_BOTTOM_RIGHT_CORNER);
+
+        for (int i = 1; i < room.getSize()-1; ++i) {
+            textGraphics.setCharacter(labelBoxTopLeft.withRelativeRow(i), Symbols.DOUBLE_LINE_VERTICAL);
+            textGraphics.setCharacter(labelBoxTopRightCorner.withRelativeRow(i), Symbols.DOUBLE_LINE_VERTICAL);
+        }
     }
 
     public void render(GameState gs) {
