@@ -1,8 +1,13 @@
 package core;
 
+import core.GameController;
+
 public class GameInitializer {
+    GameController controller;
+
     public void initializeGame() {
-        System.out.println("Game initialized");
+        controller = new GameController();
+        controller.handleEvent();
     }
 
     public static void main(String[] args) {
