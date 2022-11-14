@@ -1,5 +1,6 @@
 package core;
 
+import core.Level;
 import models.Door;
 import models.GameObject;
 import models.Item;
@@ -15,23 +16,12 @@ public class Room {
     private boolean visible;
     private List<GameObject> objects;
 
-    public Room(boolean visible, int posX, int posY) {
+    public Room(boolean visible, int posX, int posY, List<GameObject> objects) {
+        this.visible = visible;
         this.posX = posX;
         this.posY = posY;
-        this.visible = visible;
+        this.objects = objects;
         this.size = 10;
-
-        // TODO: Add random level generation
-        if (posX == 0) {
-            objects = new ArrayList<>(2);
-            objects.add(new Door(9, 2, 35, 15, 1));
-            objects.add(new Item(2, 2, "Blade of the abyss"));
-        }
-        if (posX == 30) {
-            objects = new ArrayList<>(2);
-            objects.add(new Door(39, 12, 5, 5, 0));
-            objects.add(new Item(37, 13, "Sacrificial lamb"));
-        }
     }
 
     /**

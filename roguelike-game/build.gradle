@@ -15,6 +15,7 @@ dependencies {
 
     // This dependency is used by the application.
     implementation 'com.googlecode.lanterna:lanterna:3.1.1'
+    implementation 'org.yaml:snakeyaml:1.21'
 }
 
 application {

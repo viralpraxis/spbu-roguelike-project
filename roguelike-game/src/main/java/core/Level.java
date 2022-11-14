@@ -7,11 +7,9 @@ public class Level {
     private int currentRoomId;
     private int levelId;
 
-    public Level() {
+    public Level(Room[] rooms) {
+        this.rooms = rooms;
         levelId = 0;
-        rooms = new Room[2];
-        rooms[0] = new Room(true, 0, 0);
-        rooms[1] = new Room(false, 30, 10);
     }
 
     /**

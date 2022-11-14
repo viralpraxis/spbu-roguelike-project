@@ -1,13 +1,15 @@
 package core;
 
 import models.Player;
+import repositories.MapRepository;
 
 public class GameState {
     private Level level;
     private Player player;
 
     public GameState() {
-        level = new Level();
+        Level[] levels = new MapRepository().getLevels();
+        this.level = levels[0];
         player = new Player(5, 5, 100, 100, "John");
     }
 
