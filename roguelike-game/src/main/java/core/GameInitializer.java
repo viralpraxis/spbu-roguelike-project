@@ -1,16 +1,36 @@
 package core;
 
+import eventproducers.EventProducer;
 import core.GameController;
 
 public class GameInitializer {
-    GameController controller;
-
-    public void initializeGame() {
-        controller = new GameController();
-        controller.handleEvent();
-    }
+    private static GameController controller;
 
     public static void main(String[] args) {
-        new GameInitializer().initializeGame();
+        initialize();
+    }
+
+    public static GameController getGameController() {
+        return controller;
+    }
+
+    private static void initialize() {
+        Thread thread = new Thread() {
+          @Override
+          public void run() {
+            EventProducer.initializeAll();
+            controller = new GameController();
+
+            while (true) {}
+          }
+        };
+        thread.start();
+
+        try {
+          thread.join();
+        } catch (InterruptedException e) {
+          e.printStackTrace();
+          System.exit(0);
+        }
     }
 }

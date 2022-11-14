@@ -1,5 +1,7 @@
 package core;
 
+import lib.Event;
+import lib.GameStateChanger;
 import ui.Renderer;
 
 public class GameController {
@@ -9,9 +11,14 @@ public class GameController {
     public GameController() {
         render = new Renderer();
         gameState = new GameState();
+
+        render.render(gameState);
     }
 
-    public void handleEvent() {
+    public boolean handleEvent(Event event) {
+        GameStateChanger.call(gameState, event);
         render.render(gameState);
+
+        return true;
     }
 }
