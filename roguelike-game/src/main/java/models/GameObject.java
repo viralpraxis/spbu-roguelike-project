@@ -1,15 +1,11 @@
 package models;
 
-public class GameObject {
+public abstract class GameObject {
     protected String title;
     protected char[][] representation; 
     protected int posX;
     protected int posY;
-
-    public GameObject(int posX, int posY) {
-        this.posX = posX;
-        this.posY = posY;
-    }
+    protected boolean steppable;
 
     public char[][] getRepresentation() {
         return representation;
@@ -22,4 +18,6 @@ public class GameObject {
     public int posY() {
         return posY;
     }
+
+    public abstract void stepOn(Mob mob);
 }

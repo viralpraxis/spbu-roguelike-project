@@ -71,6 +71,10 @@ public class Renderer {
             textGraphics.setCharacter(labelBoxTopLeft.withRelativeRow(i), Symbols.DOUBLE_LINE_VERTICAL);
             textGraphics.setCharacter(labelBoxTopRightCorner.withRelativeRow(i), Symbols.DOUBLE_LINE_VERTICAL);
         }
+
+        for (GameObject go : room.getRoomContent()) {
+            drawGameObject(go);
+        }
     }
 
     public void render(GameState gs) {
