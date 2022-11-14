@@ -21,4 +21,12 @@ public class Mob extends GameObject {
     public void stepOn(Mob mob) {
         // TODO: Attack character or another mob
     }
+
+    public int getHealth() {
+        return health;
+    }
+
+    public int getPower() {
+        return power;
+    }
 }

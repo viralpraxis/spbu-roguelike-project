@@ -5,12 +5,15 @@ import models.Item;
 import models.GameObject;
 import models.Mob;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Room {
     private final int posX;
     private final int posY;
     private final int size;
     private boolean visible;
-    private GameObject[] objects;
+    private List<GameObject> objects;
 
     public Room(boolean visible, int posX, int posY) {
         this.posX = posX;
@@ -20,14 +23,14 @@ public class Room {
 
         // TODO: Add random level generation
         if (posX == 0) {
-            objects = new GameObject[2];
-            objects[0] = new Door(9, 2, 35, 15, 1);
-            objects[1] = new Item(2, 2);
+            objects = new ArrayList<>(2);
+            objects.add(new Door(9, 2, 35, 15, 1));
+            objects.add(new Item(2, 2, "Blade of the abyss"));
         }
         if (posX == 30) {
-            objects = new GameObject[2];
-            objects[0] = new Door(39, 12, 5, 5, 0);
-            objects[1] = new Item(37, 13);
+            objects = new ArrayList<>(2);
+            objects.add(new Door(39, 12, 5, 5, 0));
+            objects.add(new Item(37, 13, "Sacrificial lamb"));
         }
     }
 
@@ -44,11 +47,13 @@ public class Room {
         int x = mob.posX() + dx;
         int y = mob.posY() + dy;
 
+        int objId = 0;
         for (GameObject obj : objects) {
             if (obj.posX() == x && obj.posY() == y) {
                 objToStep = obj;
                 break;
             }
+            objId += 1;
         }
 
         int retValue = -1;
@@ -56,6 +61,10 @@ public class Room {
         if (objToStep != null && objToStep instanceof Door) {
             // We stepped on a door
             retValue = ((Door) objToStep).leadsTo();
+        }
+
+        if (objToStep != null && objToStep instanceof Item) {
+            objects.remove(objId);
         }
 
         if (!nextStepOutsideRoom(mob, dx, dy))
@@ -90,9 +99,9 @@ public class Room {
 
     /**
      * Gets all objects that are in the room.
-     * @return An array of GameObjects that are in the room
+     * @return A list of GameObjects that are in the room
      */
-    public GameObject[] getRoomContent() {
+    public List<GameObject> getRoomContent() {
         return objects;
     }
 

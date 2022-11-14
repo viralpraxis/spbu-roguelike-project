@@ -1,9 +1,11 @@
 package models;
 
 public class Item extends GameObject {
-    public Item(int posX, int posY) {
+    private String name;
+    public Item(int posX, int posY, String name) {
         this.posX = posX;
         this.posY = posY;
+        this.name = name;
         representation = new char[1][1];
         representation[0][0] = 'i';
         visible = true;
@@ -15,5 +17,9 @@ public class Item extends GameObject {
 
         Inventory.getInventory().addItem(this);
         visible = false;
+    }
+
+    public String getName() {
+        return name;
     }
 }
