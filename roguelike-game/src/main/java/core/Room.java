@@ -24,11 +24,11 @@ public class Room {
         return visible;
     }
 
-    public int getX() {
+    public int posX() {
         return posX;
     }
 
-    public int getY() {
+    public int posY() {
         return posY;
     }
 

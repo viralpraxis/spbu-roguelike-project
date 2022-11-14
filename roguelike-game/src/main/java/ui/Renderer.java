@@ -30,7 +30,6 @@ public class Renderer {
             screen.startScreen();
             screen.setCursorPosition(null);
         } catch (Exception e) {
-            // TODO: handle exception
             e.printStackTrace();
         }
     }
@@ -46,7 +45,7 @@ public class Renderer {
     private void drawRoom(Room room) {
         if (!room.isVisible()) return;
 
-        TerminalPosition labelBoxTopLeft = new TerminalPosition(room.getX(), room.getY());
+        TerminalPosition labelBoxTopLeft = new TerminalPosition(room.posX(), room.posY());
         TerminalSize labelBoxSize = new TerminalSize(room.getSize(), room.getSize());
         TerminalPosition labelBoxTopRightCorner = labelBoxTopLeft.withRelativeColumn(labelBoxSize.getColumns()-1);
         TextGraphics textGraphics = screen.newTextGraphics();
@@ -79,27 +78,28 @@ public class Renderer {
             while (true) {
                 Player player = gs.getPlayer();
 
+                // TODO: Add event handler to handle user input
                 KeyStroke keyStroke = screen.pollInput();
                 if (keyStroke != null && (keyStroke.getKeyType() == KeyType.Escape)) break;
 
                 if (keyStroke != null && (keyStroke.getKeyType() == KeyType.ArrowDown)) {
                     screen.setCharacter(player.posX(), player.posY(), new TextCharacter(' '));
-                    player.move(0, +1);
+                    gs.updateGameState(0, +1);
                 }
 
                 if (keyStroke != null && (keyStroke.getKeyType() == KeyType.ArrowUp)) {
                     screen.setCharacter(player.posX(), player.posY(), new TextCharacter(' '));
-                    player.move(0, -1);
+                    gs.updateGameState(0, -1);
                 }
 
                 if (keyStroke != null && (keyStroke.getKeyType() == KeyType.ArrowRight)) {
                     screen.setCharacter(player.posX(), player.posY(), new TextCharacter(' '));
-                    player.move(+1, 0);
+                    gs.updateGameState(+1, 0);
                 }
 
                 if (keyStroke != null && (keyStroke.getKeyType() == KeyType.ArrowLeft)) {
                     screen.setCharacter(player.posX(), player.posY(), new TextCharacter(' '));
-                    player.move(-1, 0);
+                    gs.updateGameState(-1, 0);
                 }
 
                 // draw rooms    
@@ -120,7 +120,6 @@ public class Renderer {
                 try {
                     screen.close();
                 } catch (Exception e) {
-                    // TODO: handle exception
                     e.printStackTrace();
                 }
             }

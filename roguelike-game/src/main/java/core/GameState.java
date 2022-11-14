@@ -8,7 +8,7 @@ public class GameState {
 
     public GameState() {
         level = new Level();
-        player = new Player(0, 0, 100, 100, "John");
+        player = new Player(5, 5, 100, 100, "John");
     }
 
     public Room[] getRooms() {
@@ -17,5 +17,9 @@ public class GameState {
 
     public Player getPlayer() {
         return player;
+    }
+
+    public void updateGameState(int dx, int dy) {
+        level.makeNextMove(player, dx, dy);
     }
 }
