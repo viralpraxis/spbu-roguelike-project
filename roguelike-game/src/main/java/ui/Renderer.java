@@ -35,6 +35,8 @@ public class Renderer {
     }
 
     private void drawGameObject(GameObject object) {
+        if (!object.isVisible())
+            return;
         for (int i = 0; i < object.getRepresentation().length; ++i) {
             for (int j = 0; j < object.getRepresentation()[0].length; ++j)
                 screen.setCharacter(object.posX() + i, object.posY() + i,

@@ -1,6 +1,7 @@
 package core;
 
 import models.Door;
+import models.Item;
 import models.GameObject;
 import models.Mob;
 
@@ -17,16 +18,26 @@ public class Room {
         this.visible = visible;
         this.size = 10;
 
+        // TODO: Add random level generation
         if (posX == 0) {
-            objects = new GameObject[1];
+            objects = new GameObject[2];
             objects[0] = new Door(9, 2, 35, 15, 1);
+            objects[1] = new Item(2, 2);
         }
         if (posX == 30) {
-            objects = new GameObject[1];
+            objects = new GameObject[2];
             objects[0] = new Door(39, 12, 5, 5, 0);
+            objects[1] = new Item(37, 13);
         }
     }
 
+    /**
+     * Handles next move of a mob.
+     * @param mob Mob whose move we should handle
+     * @param dx relative change of position in x direction
+     * @param dy relative change of position in y direction
+     * @return -1 if after the turn mob stays in the same room; id of the next room otherwise
+     */
     public int makeMove(Mob mob, int dx, int dy) {
         GameObject objToStep = null;
 
@@ -77,6 +88,10 @@ public class Room {
         return size;
     }
 
+    /**
+     * Gets all objects that are in the room.
+     * @return An array of GameObjects that are in the room
+     */
     public GameObject[] getRoomContent() {
         return objects;
     }

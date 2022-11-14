@@ -11,6 +11,7 @@ public class Door extends GameObject {
         this.leadsToX = leadsToX;
         this.leadsToY = leadsToY;
         this.leadsToRoom = leadsToRoom;
+        this.visible = true;
         
         representation = new char[1][1];
         representation[0][0] = '+';

@@ -6,6 +6,7 @@ public abstract class GameObject {
     protected int posX;
     protected int posY;
     protected boolean steppable;
+    protected boolean visible;
 
     public char[][] getRepresentation() {
         return representation;
@@ -17,6 +18,10 @@ public abstract class GameObject {
 
     public int posY() {
         return posY;
+    }
+
+    public boolean isVisible() {
+        return visible;
     }
 
     public abstract void stepOn(Mob mob);

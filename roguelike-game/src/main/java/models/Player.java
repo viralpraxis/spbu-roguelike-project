@@ -25,5 +25,6 @@ public class Player extends Mob {
         this.name = name;
         this.representation = new char[1][1];
         this.representation[0][0] = '@';
+        this.visible = true;
     }
 }
