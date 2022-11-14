@@ -36,13 +36,13 @@ public class Renderer {
     public Renderer() {
         mapPosX = 0;
         mapPosY = 0;
-        mapWidth = 50;
-        mapHeight = 24;
-        inventoryPosX = 50;
+        mapWidth = 100;
+        mapHeight = 48;
+        inventoryPosX = 100;
         inventoryPosY = 0;
         inventoryWidth = 30;
         inventoryHeight = 20;
-        statPosX = 50;
+        statPosX = 100;
         statPosY = 19;
         statWidth = 30;
         statHeight = 5;
@@ -50,6 +50,7 @@ public class Renderer {
         try {
 
             DefaultTerminalFactory dtf = new DefaultTerminalFactory();
+            dtf.setInitialTerminalSize(new TerminalSize(130, 48));
 
             terminal = dtf.createTerminal();
 
