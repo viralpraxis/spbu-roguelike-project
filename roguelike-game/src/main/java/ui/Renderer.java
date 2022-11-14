@@ -4,6 +4,7 @@ import core.GameState;
 import core.Room;
 import models.GameObject;
 import models.Player;
+import models.Inventory;
 
 import com.googlecode.lanterna.*;
 import com.googlecode.lanterna.graphics.TextGraphics;
@@ -39,7 +40,7 @@ public class Renderer {
             return;
         for (int i = 0; i < object.getRepresentation().length; ++i) {
             for (int j = 0; j < object.getRepresentation()[0].length; ++j)
-                screen.setCharacter(object.posX() + i, object.posY() + i,
+                screen.setCharacter(object.posX() + i + 1, object.posY() + i + 1,
                                     new TextCharacter(object.getRepresentation()[i][j]));
         }
     }
@@ -47,7 +48,7 @@ public class Renderer {
     private void drawRoom(Room room) {
         if (!room.isVisible()) return;
 
-        TerminalPosition labelBoxTopLeft = new TerminalPosition(room.posX(), room.posY());
+        TerminalPosition labelBoxTopLeft = new TerminalPosition(room.posX() + 1, room.posY() + 1);
         TerminalSize labelBoxSize = new TerminalSize(room.getSize(), room.getSize());
         TerminalPosition labelBoxTopRightCorner = labelBoxTopLeft.withRelativeColumn(labelBoxSize.getColumns()-1);
         TextGraphics textGraphics = screen.newTextGraphics();
@@ -79,8 +80,40 @@ public class Renderer {
         }
     }
 
+    private void drawMapFrame() {
+        TerminalPosition labelBoxTopLeft = new TerminalPosition(0, 0);
+        TerminalSize labelBoxSize = new TerminalSize(50, 24);
+        TerminalPosition labelBoxTopRightCorner = labelBoxTopLeft.withRelativeColumn(labelBoxSize.getColumns()-1);
+        TextGraphics textGraphics = screen.newTextGraphics();
+        //This isn't really needed as we are overwriting everything below anyway, but just for demonstrative purpose
+        textGraphics.fillRectangle(labelBoxTopLeft, labelBoxSize, ' ');
+
+        textGraphics.drawLine(labelBoxTopLeft.withRelativeColumn(1),
+                labelBoxTopLeft.withRelativeColumn(labelBoxSize.getColumns()-1),
+                Symbols.SINGLE_LINE_HORIZONTAL);
+        textGraphics.drawLine(labelBoxTopLeft.withRelativeRow(labelBoxSize.getRows()-1).withRelativeColumn(1),
+                labelBoxTopLeft.withRelativeRow(labelBoxSize.getRows()-1).withRelativeColumn(labelBoxSize.getColumns()-1),
+                Symbols.SINGLE_LINE_HORIZONTAL);
+
+        textGraphics.drawLine(labelBoxTopLeft.withRelativeRow(1),
+                labelBoxTopLeft.withRelativeRow(labelBoxSize.getRows()-1),
+                Symbols.SINGLE_LINE_VERTICAL);
+        textGraphics.drawLine(labelBoxTopLeft.withRelativeColumn(labelBoxSize.getColumns()-1).withRelativeRow(1),
+                labelBoxTopLeft.withRelativeColumn(labelBoxSize.getColumns()-1).withRelativeRow(labelBoxSize.getRows()-1),
+                Symbols.SINGLE_LINE_VERTICAL);
+
+        textGraphics.setCharacter(labelBoxTopLeft, Symbols.SINGLE_LINE_TOP_LEFT_CORNER);
+        textGraphics.setCharacter(labelBoxTopLeft.withRelativeRow(labelBoxSize.getRows()-1),
+                Symbols.SINGLE_LINE_BOTTOM_LEFT_CORNER);
+
+        textGraphics.setCharacter(labelBoxTopRightCorner, Symbols.SINGLE_LINE_TOP_RIGHT_CORNER);
+        textGraphics.setCharacter(labelBoxTopRightCorner.withRelativeRow(labelBoxSize.getRows()-1),
+                Symbols.SINGLE_LINE_BOTTOM_RIGHT_CORNER);
+    }
+
     public void render(GameState gs) {
         try {
+            drawMapFrame();
             while (true) {
                 Player player = gs.getPlayer();
 
@@ -107,6 +140,9 @@ public class Renderer {
                     screen.setCharacter(player.posX(), player.posY(), new TextCharacter(' '));
                     gs.updateGameState(-1, 0);
                 }
+
+                //screen.doResizeIfNecessary();
+                //drawMapFrame();
 
                 // draw rooms    
                 for (Room room : gs.getRooms()) {
