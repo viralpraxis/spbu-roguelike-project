@@ -9,7 +9,12 @@ public class Event {
         PLAYER_MOVE_UP,
         PLAYER_MOVE_DOWN,
         PLAYER_MOVE_LEFT,
-        PLAYER_MOVE_RIGHT
+        PLAYER_MOVE_RIGHT,
+        PLAYER_SELECT_ITEM,
+        PLAYER_UNSELECT_ITEM,
+        PLAYER_SELECT_NEXT_ITEM,
+        PLAYER_SELECT_PREVIOUS_ITEM,
+        PLAYER_EQUIP_ITEM,
     }
 
     public Event(Type type) {

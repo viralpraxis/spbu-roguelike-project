@@ -154,13 +154,20 @@ public class Renderer {
     }
 
     private void drawInventory() {
-        TextGraphics textGraphics = screen.newTextGraphics();
         int column = inventoryPosX + 1;
         int row = inventoryPosY + 1;
 
+        int itemId = 0;
         for (Item item : Inventory.getInventory().getItems()) {
+            TextGraphics textGraphics = screen.newTextGraphics();
+            if (Inventory.getInventory().isSelected() && Inventory.getInventory().getSelectedId() == itemId)
+                textGraphics.setForegroundColor(TextColor.ANSI.CYAN_BRIGHT);
+            if (item.isEquipped())
+                textGraphics.setBackgroundColor(TextColor.ANSI.BLUE);
+
             textGraphics.putString(column, row, item.getName());
             row += 1;
+            itemId += 1;
         }
     }
 

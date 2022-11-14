@@ -40,6 +40,21 @@ class UserActionEventProducer extends EventProducer {
                     case (KeyEvent.VK_RIGHT):
                         event = new Event(Event.Type.PLAYER_MOVE_RIGHT);
                         break;
+                    case (KeyEvent.VK_D):
+                        event = new Event(Event.Type.PLAYER_SELECT_ITEM);
+                        break;
+                    case (KeyEvent.VK_A):
+                        event = new Event(Event.Type.PLAYER_UNSELECT_ITEM);
+                        break;
+                    case (KeyEvent.VK_W):
+                        event = new Event(Event.Type.PLAYER_SELECT_PREVIOUS_ITEM);
+                        break;
+                    case (KeyEvent.VK_S):
+                        event = new Event(Event.Type.PLAYER_SELECT_NEXT_ITEM);
+                        break;
+                    case (KeyEvent.VK_SPACE):
+                        event = new Event(Event.Type.PLAYER_EQUIP_ITEM);
+                        break;
                 }
 
                 if (event != null) {
