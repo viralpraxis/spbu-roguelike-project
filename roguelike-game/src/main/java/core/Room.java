@@ -1,8 +1,8 @@
 package core;
 
 import models.Door;
-import models.Item;
 import models.GameObject;
+import models.Item;
 import models.Mob;
 
 import java.util.ArrayList;
@@ -36,9 +36,10 @@ public class Room {
 
     /**
      * Handles next move of a mob.
+     *
      * @param mob Mob whose move we should handle
-     * @param dx relative change of position in x direction
-     * @param dy relative change of position in y direction
+     * @param dx  relative change of position in x direction
+     * @param dy  relative change of position in y direction
      * @return -1 if after the turn mob stays in the same room; id of the next room otherwise
      */
     public int makeMove(Mob mob, int dx, int dy) {
@@ -77,28 +78,52 @@ public class Room {
         return retValue;
     }
 
+    /**
+     * Makes room visible, so it will be rendered.
+     */
     public void makeVisible() {
         visible = true;
     }
 
+    /**
+     * Checks whether the room is visible.
+     *
+     * @return true if room is visible, false - otherwise
+     */
     public boolean isVisible() {
         return visible;
     }
 
+    /**
+     * Gets x position of the top left corner of the room.
+     *
+     * @return x position of the corner
+     */
     public int posX() {
         return posX;
     }
 
+    /**
+     * Gets y position of the top left corner of the room.
+     *
+     * @return y position of the corner
+     */
     public int posY() {
         return posY;
     }
 
+    /**
+     * Gets the outer size of the room.
+     *
+     * @return size of the room
+     */
     public int getSize() {
         return size;
     }
 
     /**
      * Gets all objects that are in the room.
+     *
      * @return A list of GameObjects that are in the room
      */
     public List<GameObject> getRoomContent() {
