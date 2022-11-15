@@ -27,4 +27,15 @@ public class Player extends Mob {
         this.representation[0][0] = '@';
         this.visible = true;
     }
+
+    /**
+     * Moves player to the point (x, y) on the map.
+     *
+     * @param x new x coordinate of the player
+     * @param y new y coordinate of the player
+     */
+    public void moveAbsolute(int x, int y) {
+        posX = x;
+        posY = y;
+    }
 }

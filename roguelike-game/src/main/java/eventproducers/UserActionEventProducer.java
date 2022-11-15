@@ -55,6 +55,9 @@ class UserActionEventProducer extends EventProducer {
                     case (KeyEvent.VK_SPACE):
                         event = new Event(Event.Type.PLAYER_EQUIP_ITEM);
                         break;
+                    case (KeyEvent.VK_N):
+                        event = new Event(Event.Type.PLAYER_MOVE_NEXT_LEVEL);
+                        break;
                 }
 
                 if (event != null) {

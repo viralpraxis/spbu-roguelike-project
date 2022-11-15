@@ -29,3 +29,32 @@ maps:
               x: 37
               y: 13
               name: Sacrificial lamb
+    - rooms:
+        - visible: true
+          x: 30
+          y: 0
+          objects:
+            - type: door
+              x: 35
+              y: 0
+              target_x: 5
+              target_y: 25
+              target_room: 1
+            - type: item
+              x: 35
+              y: 5
+              name: Veil of the darkest night
+        - visible: false
+          x: 3
+          y: 20
+          objects:
+            - type: door
+              x: 3
+              y: 22
+              target_x: 36
+              target_y: 6
+              target_room: 0
+            - type: item
+              x: 4
+              y: 23
+              name: Sacrificial lamb

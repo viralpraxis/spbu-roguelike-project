@@ -32,6 +32,7 @@ public class Renderer {
     private final int statPosY;
     private final int statWidth;
     private final int statHeight;
+    private int currentLevel;
 
     public Renderer() {
         mapPosX = 0;
@@ -46,6 +47,7 @@ public class Renderer {
         statPosY = 19;
         statWidth = 30;
         statHeight = 5;
+        currentLevel = -1;
 
         try {
 
@@ -184,6 +186,12 @@ public class Renderer {
         textGraphics.putString(column, row + 1, "Attack: " + Integer.toString(player.getPower()));
     }
 
+    private void refreshScreenForNextLevel() {
+        screen.clear();
+        drawMapFrame();
+        drawUtilitiesFrame();
+    }
+
     public void render(GameState gameState) {
         try {
             tryRender(gameState);
@@ -193,9 +201,16 @@ public class Renderer {
     }
 
     public void tryRender(GameState gs) throws IOException {
+        if (currentLevel == -1)
+            currentLevel = gs.getLevelNumber();
+
         Player player = gs.getPlayer();
 
         // screen.setCharacter(player.posX(), player.posY(), new TextCharacter(' '));
+        if (currentLevel != gs.getLevelNumber()) {
+            currentLevel = gs.getLevelNumber();
+            refreshScreenForNextLevel();
+        }
 
         // draw rooms
         for (Room room : gs.getRooms()) {

@@ -47,6 +47,10 @@ public class GameStateChanger {
                 Inventory.getInventory().selectedItemChangeEquipStatus(player);
 
                 break;
+            case PLAYER_MOVE_NEXT_LEVEL:
+                gameState.tryMoveToNextLevel();
+
+                break;
             case GAME_EXIT:
                 Logger.log("Exiting..");
                 System.exit(0);

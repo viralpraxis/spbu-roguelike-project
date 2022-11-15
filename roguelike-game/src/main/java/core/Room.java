@@ -1,12 +1,10 @@
 package core;
 
-import core.Level;
 import models.Door;
 import models.GameObject;
 import models.Item;
 import models.Mob;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Room {
@@ -22,6 +20,20 @@ public class Room {
         this.posY = posY;
         this.objects = objects;
         this.size = 10;
+    }
+
+    /**
+     * Checks whether this room contains Mobs.
+     *
+     * @return true if this room contains Mobs, false - otherwise
+     */
+    public boolean containsMobs() {
+        for (GameObject object : objects) {
+            if (object instanceof Mob) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**

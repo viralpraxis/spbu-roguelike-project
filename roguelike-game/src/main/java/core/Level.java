@@ -13,6 +13,19 @@ public class Level {
     }
 
     /**
+     * Checks whether level is finished, and player can pass to the next level. Level is considered finished
+     * when all mobs are dead.
+     *
+     * @return true if level is finished, false - otherwise
+     */
+    public boolean isFinished() {
+        for (Room room : rooms) {
+            if (room.containsMobs()) return false;
+        }
+        return true;
+    }
+
+    /**
      * Handles next Player move at the level.
      *
      * @param player Player whose move will be handled

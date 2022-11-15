@@ -15,6 +15,7 @@ public class Event {
         PLAYER_SELECT_NEXT_ITEM,
         PLAYER_SELECT_PREVIOUS_ITEM,
         PLAYER_EQUIP_ITEM,
+        PLAYER_MOVE_NEXT_LEVEL,
     }
 
     public Event(Type type) {
