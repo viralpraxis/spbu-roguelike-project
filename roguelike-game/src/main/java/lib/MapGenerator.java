@@ -3,6 +3,7 @@ package lib;
 import java.util.Random;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import core.*;
 import models.*;
@@ -11,63 +12,98 @@ public class MapGenerator {
     private static Random randomizer = new Random();
 
     public static Level[] generate(int width, int height) {
-        int roomsCount = randomizer.nextInt(7);
+        int roomsCount = 2;
         Room[] rooms = new Room[roomsCount];
+        int[][] roomPositions = generateRoomPositions(roomsCount, width, height);
+        int[][] doorPositions = generateDoorPositions(roomPositions);
 
         for (int i = 0; i < roomsCount; i++) {
             rooms[i] = generateRoom(
+                i,
                 i == 0,
-                randomizer.nextInt(width - 10),
-                randomizer.nextInt(height - 10)
+                roomPositions[i][0],
+                roomPositions[i][1],
+                doorPositions[i],
+                doorPositions[(i + 1) % roomsCount],
+                roomsCount
               );
         }
 
+        int[] playerPosition = randomPointInsideRoom(rooms[0]);
         return new Level[]{
-          new Level(rooms)
+          new Level(
+              rooms,
+              new Player(playerPosition[0], playerPosition[1])
+          )
         };
     }
 
-    private static Room generateRoom(boolean visible, int x, int y) {
+    private static int[][] generateRoomPositions(int roomsCount, int width, int height) {
+        int[][] roomPositions = new int[roomsCount][2];
+
+        for (int i = 0; i < roomsCount; i++) {
+            roomPositions[i] = new int[]{
+                randomizer.nextInt(width - 11),
+                randomizer.nextInt(height - 11)
+            };
+        }
+
+        return roomPositions;
+    }
+
+    private static int[][] generateDoorPositions(int[][] roomPositions) {
+        int[][] doorPositions = new int[roomPositions.length][2];
+
+        for (int i = 0; i < doorPositions.length; i++) {
+            doorPositions[i] = randomPointInRoomBound(roomPositions[i][0], roomPositions[i][1], 10);
+        }
+
+        return doorPositions;
+    }
+
+    private static Room generateRoom(int roomID, boolean visible, int x, int y, int[] doorPosition, int[] nextDoorPosition, int roomsCount) {
+        System.out.println(roomID + " " + x + " " + y + Arrays.toString(doorPosition) + " " + Arrays.toString(nextDoorPosition));
         return new Room(
             visible,
             x,
             y,
-            generateGameObject(x, y)
+            generateGameObject(roomID, x, y, doorPosition, nextDoorPosition, roomsCount)
         );
     }
 
-    private static List<GameObject> generateGameObject(int roomX, int roomY) {
+    private static List<GameObject> generateGameObject(int roomID, int roomX, int roomY, int[] doorPosition, int[] nextDoorPosition, int roomsCount) {
         ArrayList<GameObject> gameObjects = new ArrayList<>();
 
-        int[] doorPoint = randomPointInRoomBound(roomX, roomY, 10);
+        gameObjects.add(
+            new Door(
+                doorPosition[0],
+                doorPosition[1],
+                nextDoorPosition[0],
+                nextDoorPosition[1],
+                (roomID + 1) % roomsCount
+            )
+        );
 
         return gameObjects;
-
-        // gameObjects.add(
-        //     new Door(
-        //         doorPoint[0],
-        //         doorPoint[1]
-        //     )
-        // );
     }
 
     // yeah whatever
     private static int[] randomPointInRoomBound(int x, int y, int size) {
-        int[][] points = new int[size * 4 - 4][2];
+        int[][] points = new int[size * 4 - 8][2];
         int index = 0;
 
-        for (int i = 0; i < size; i++) { points[index++] = new int[]{x + i, y}; }
-        for (int i = 0; i < size; i++) { points[index++] = new int[]{x + i, y + size}; }
+        for (int i = 1; i < size - 1; i++) { points[index++] = new int[]{x + i, y}; }
+        for (int i = 1; i < size - 1; i++) { points[index++] = new int[]{x + i, y + size - 1}; }
         for (int i = 1; i < size - 1; i++) { points[index++] = new int[]{x, y + i}; }
-        for (int i = 1; i < size - 1; i++) { points[index++] = new int[]{x + size, y + i}; }
+        for (int i = 1; i < size - 1; i++) { points[index++] = new int[]{x + size - 1, y + i}; }
 
         return points[randomizer.nextInt(points.length)];
     }
 
-    private int[] randomPointInsideRoom(Room room) {
+    private static int[] randomPointInsideRoom(Room room) {
         return new int[]{
-            room.posX() + 1 + randomizer.nextInt(room.getSize()),
-            room.posY() + 1 + randomizer.nextInt(room.getSize())
+            room.posX() + 1 + randomizer.nextInt(room.getSize() - 1),
+            room.posY() + 1 + randomizer.nextInt(room.getSize() - 1)
         };
     }
 }

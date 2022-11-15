@@ -12,35 +12,17 @@ import models.GameObject;
 import models.Player;
 
 public class LevelRepository extends Repository {
-    private LevelData[] levels;
-
-    public class LevelData {
-        private Level level;
-        private Player player;
-
-        public LevelData(Level level, Player player) {
-            this.level = level;
-            this.player = player;
-        }
-
-        public Level getLevel() {
-            return this.level;
-        }
-
-        public Player getPlayer() {
-            return this.player;
-        }
-    }
+    private Level[] levels;
 
     String getDatasourceFilepath() {
         return "src/main/java/config/levels.yaml";
     }
 
-    public LevelData[] getLevels() {
+    public Level[] getLevels() {
         if (this.levels != null) { return this.levels; }
 
         ArrayList<LinkedHashMap> levels = (ArrayList<LinkedHashMap>) data.get("levels");
-        LevelData[] targetLevelsData = new LevelData[levels.size()];
+        Level[] targetLevels = new Level[levels.size()];
         int levelIndex = 0;
         for (LinkedHashMap level : levels) {
             Player player = null;
@@ -61,15 +43,15 @@ public class LevelRepository extends Repository {
                     buildGameObjects((ArrayList<LinkedHashMap>) room.get("objects"))
                 );
             }
-            targetLevelsData[levelIndex++] = new LevelData(
-                new Level(targetRooms),
+            targetLevels[levelIndex++] = new Level(
+                targetRooms,
                 player
             );
         }
 
-        this.levels = targetLevelsData;
+        this.levels = targetLevels;
 
-        return targetLevelsData;
+        return targetLevels;
     }
 
     private List<GameObject> buildGameObjects(ArrayList<LinkedHashMap> data) {

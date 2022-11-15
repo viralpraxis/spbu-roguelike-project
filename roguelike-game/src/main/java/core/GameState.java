@@ -6,15 +6,14 @@ import lib.MapGenerator;
 
 public class GameState {
     private Level level;
-    private LevelRepository.LevelData[] levels;
+    private Level[] levels;
     private Player player;
     private int curLevelId = 0;
 
     public GameState() {
-        // Level[] levels = MapGenerator.generate(50, 24);
+        // this.levels = MapGenerator.generate(100, 48);
         this.levels = new LevelRepository().getLevels();
-        this.level = this.levels[0].getLevel();
-        this.player = this.levels[0].getPlayer();
+        this.level = this.levels[0];
     }
 
     /**
@@ -24,8 +23,7 @@ public class GameState {
         if (!level.isFinished()) return;
         if (++curLevelId >= levels.length) return;
 
-        this.level = levels[curLevelId].getLevel();
-        this.player = levels[curLevelId].getPlayer();
+        this.level = levels[curLevelId];
     }
 
     /**
@@ -43,7 +41,7 @@ public class GameState {
      * @return A player
      */
     public Player getPlayer() {
-        return player;
+        return this.level.getPlayer();
     }
 
     /**
@@ -53,7 +51,7 @@ public class GameState {
      * @param dy relative change of position in the y direction
      */
     public void updateGameState(int dx, int dy) {
-        level.makeNextMove(player, dx, dy);
+        level.makeNextMove(this.level.getPlayer(), dx, dy);
     }
 
     /**

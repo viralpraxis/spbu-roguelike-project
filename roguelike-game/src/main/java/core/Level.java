@@ -4,11 +4,13 @@ import models.Player;
 
 public class Level {
     private Room[] rooms;
+    private Player player;
     private int currentRoomId;
     private int levelId;
 
-    public Level(Room[] rooms) {
+    public Level(Room[] rooms, Player player) {
         this.rooms = rooms;
+        this.player = player;
         levelId = 0;
     }
 
@@ -49,5 +51,9 @@ public class Level {
      */
     public Room[] getRooms() {
         return rooms;
+    }
+
+    public Player getPlayer() {
+        return player;
     }
 }
