@@ -1,8 +1,8 @@
 package models;
 
 public class Mob extends GameObject {
-    private int health;
-    private int power;
+    protected int health;
+    protected int power;
 
     public Mob(int posX, int posY, int health, int power) {
         this.posX = posX;

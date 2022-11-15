@@ -19,6 +19,14 @@ public class Player extends Mob {
     // private final Gender gender;
     // private final Race race;
 
+    private final static int DEFAULT_HEALTH = 100;
+    private final static int DEFAULT_POWER = 100;
+    private final static String DEFAULT_NAME = "John";
+
+    public Player(int posX, int posY) {
+        this(posX, posY, DEFAULT_HEALTH, DEFAULT_POWER, DEFAULT_NAME);
+    }
+
     public Player(int posX, int posY, int health, int power, String name) {
         super(posX, posY, health, power);
 
@@ -37,5 +45,10 @@ public class Player extends Mob {
     public void moveAbsolute(int x, int y) {
         posX = x;
         posY = y;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Player((%d, %d), H%s, S%s, %s)", posX, posY, health, power, name);
     }
 }
