@@ -6,21 +6,15 @@ import lib.MapGenerator;
 
 public class GameState {
     private Level level;
+    private LevelRepository.LevelData[] levels;
     private Player player;
-    private Level[] levels;
-    private int curLevelId;
+    private int curLevelId = 0;
 
     public GameState() {
-        LevelRepository.LevelData[] levelsData = new LevelRepository().getLevels();
         // Level[] levels = MapGenerator.generate(50, 24);
-        this.level = levelsData[0].getLevel();
-
-        Level[] levels = new Level[levelsData.length];
-        for (int i = 0; i < levels.length; i++) { levels[i] = levelsData[i].getLevel(); }
-        this.levels = levels;
-        curLevelId = 0;
-
-        player = levelsData[0].getPlayer();
+        this.levels = new LevelRepository().getLevels();
+        this.level = this.levels[0].getLevel();
+        this.player = this.levels[0].getPlayer();
     }
 
     /**
@@ -28,15 +22,10 @@ public class GameState {
      */
     public void tryMoveToNextLevel() {
         if (!level.isFinished()) return;
-        curLevelId += 1;
+        if (++curLevelId >= levels.length) return;
 
-        // FIXME: Add initial player coordinates at each level to maps.yaml
-        if (curLevelId == 1) {
-            player.moveAbsolute(33, 6);
-        }
-
-        if (curLevelId >= levels.length) return;
-        level = levels[curLevelId];
+        this.level = levels[curLevelId].getLevel();
+        this.player = levels[curLevelId].getPlayer();
     }
 
     /**
