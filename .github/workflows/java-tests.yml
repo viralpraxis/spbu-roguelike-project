@@ -13,6 +13,3 @@ jobs:
     - name: Run build with Gradle Wrapper
       working-directory: ./roguelike-game
       run: ./gradlew build
-    - name: Run gradle test
-      working-directory: ./roguelike-game
-      run: ./gradlew test
