@@ -11,6 +11,5 @@ class EventTest {
         Event event = new Event(Event.Type.GAME_EXIT);
 
         assertEquals(event.getType(), Event.Type.GAME_EXIT);
-        assertEquals("1", "2");
     }
 }
