@@ -11,4 +11,5 @@ jobs:
     - name: Setup Gradle
       uses: gradle/gradle-build-action@v2
     - name: Run build with Gradle Wrapper
-      run: ./roguelike-game/gradlew build
+      working-directory: ./roguelike-game
+      run: ./gradlew build
