@@ -11,6 +11,12 @@ import models.*;
 public class MapGenerator {
     private static Random randomizer = new Random();
 
+    /**
+    * This method is used to generate levels.
+    * @param width Map wisth.
+    * @param height Map height.
+    * @return Level[] Returns an array of initialized levels.
+    */
     public static Level[] generate(int width, int height) {
         int roomsCount = 2;
         Room[] rooms = new Room[roomsCount];

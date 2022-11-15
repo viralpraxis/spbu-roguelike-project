@@ -14,10 +14,15 @@ import models.Player;
 public class LevelRepository extends Repository {
     private Level[] levels;
 
+    @Override
     String getDatasourceFilepath() {
         return "src/main/java/config/levels.yaml";
     }
 
+    /**
+    * This method is used to retrieve levels.
+    * @return Level[] Returns retrieved levels.
+    */
     public Level[] getLevels() {
         if (this.levels != null) { return this.levels; }
 

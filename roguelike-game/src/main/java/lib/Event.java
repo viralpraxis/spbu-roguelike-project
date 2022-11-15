@@ -22,6 +22,10 @@ public class Event {
         this.type = type;
     }
 
+    /**
+    * This method is used to get type of event.
+    * @return Event.Type Returns type of event.
+    */
     public Event.Type getType() {
         return this.type;
     }

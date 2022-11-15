@@ -50,7 +50,6 @@ public class Renderer {
         currentLevel = -1;
 
         try {
-
             DefaultTerminalFactory dtf = new DefaultTerminalFactory();
             dtf.setInitialTerminalSize(new TerminalSize(130, 48));
 

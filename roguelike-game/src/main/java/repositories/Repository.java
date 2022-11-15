@@ -30,6 +30,10 @@ abstract class Repository {
         }
     }
 
+    /**
+    * This method is used to get raw data..
+    * @return Map<String, Object> Returns raw data.
+    */
     public Map<String, Object> getData() {
         return this.data;
     }

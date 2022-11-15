@@ -9,6 +9,9 @@ import java.awt.event.MouseEvent;
 import java.awt.event.KeyEvent;
 
 class UserActionEventProducer extends EventProducer {
+    /**
+    * This method is used to initialize an instance of this class.
+    */
     public void initialize() {
         bindEventListeners();
     }

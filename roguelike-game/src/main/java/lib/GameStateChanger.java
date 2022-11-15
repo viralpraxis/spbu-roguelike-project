@@ -6,6 +6,11 @@ import models.Inventory;
 
 // FIXME: Better naming?
 public class GameStateChanger {
+    /**
+    * This method is used to apply new event to current game state.
+    * @param gameState Current game state.
+    * @param event New event to apply to game state.
+    */
     public static void call(GameState gameState, Event event) {
         Logger.log("Event: " + event.getType().toString());
         Player player = gameState.getPlayer();
