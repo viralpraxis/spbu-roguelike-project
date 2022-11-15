@@ -17,6 +17,7 @@ public class Inventory {
 
     public static Inventory getInventory() {
         if (instance == null) instance = new Inventory();
+
         return instance;
     }
 
