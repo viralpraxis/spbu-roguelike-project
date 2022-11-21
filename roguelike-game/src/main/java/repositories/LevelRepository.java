@@ -4,8 +4,8 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
-import core.Level;
-import core.Room;
+import models.Level;
+import models.Room;
 import models.Door;
 import models.Item;
 import models.GameObject;

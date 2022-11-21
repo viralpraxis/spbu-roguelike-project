@@ -1,7 +1,7 @@
 package ui;
 
 import core.GameState;
-import core.Room;
+import models.Room;
 import models.GameObject;
 import models.Inventory;
 import models.Item;

@@ -7,8 +7,8 @@ import static org.junit.Assert.*;
 import org.hamcrest.core.IsInstanceOf;
 import static org.junit.matchers.JUnitMatchers.*;
 
-import core.Level;
-import core.Room;
+import models.Level;
+import models.Room;
 import models.Door;
 import lib.MapGenerator;
 

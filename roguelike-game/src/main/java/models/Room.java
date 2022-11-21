@@ -1,9 +1,4 @@
-package core;
-
-import models.Door;
-import models.GameObject;
-import models.Item;
-import models.Mob;
+package models;
 
 import java.util.List;
 

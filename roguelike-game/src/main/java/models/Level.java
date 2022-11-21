@@ -1,6 +1,4 @@
-package core;
-
-import models.Player;
+package models;
 
 public class Level {
     private Room[] rooms;
