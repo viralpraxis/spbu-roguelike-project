@@ -1,4 +1,4 @@
-package core;
+package lib;
 
 import java.util.Random;
 import java.util.Arrays;
@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import repositories.LevelRepository;
 import repositories.Configuration;
 import models.Level;
-import lib.LevelGenerator;
 
 
 class LevelProvider {
@@ -51,7 +50,7 @@ class LevelProvider {
         this.predefinedLevelsIterator = levelsList.iterator();
 
         this.levelGenerator = new LevelGenerator();
-        this.predefinedToGeneratedRatio = (Double) Configuration.get("map_generation.predefined_to_generated_ratio");
+        this.predefinedToGeneratedRatio = (Double) Configuration.get("level_generation.predefined_to_generated_ratio");
 
         this.isInitialized = true;
     }
