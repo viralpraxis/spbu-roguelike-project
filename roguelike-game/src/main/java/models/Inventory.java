@@ -42,10 +42,11 @@ public class Inventory {
      * Select next item in the inventory.
      */
     public void selectNext() {
-        if (items.size() == 0)
+        if (items.size() == 0) {
             lastSelectedItemId = 0;
-        else
+        } else {
             lastSelectedItemId = (lastSelectedItemId + 1) % items.size();
+        }
     }
 
     /**

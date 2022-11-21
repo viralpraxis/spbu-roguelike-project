@@ -3,6 +3,7 @@ package models;
 public class Item extends GameObject {
     private String name;
     private boolean equipped;
+
     public Item(int posX, int posY, String name) {
         this.posX = posX;
         this.posY = posY;
@@ -12,6 +13,7 @@ public class Item extends GameObject {
         visible = true;
         equipped = false;
     }
+
     @Override
     public void stepOn(Mob mob) {
         if (!(mob instanceof Player))

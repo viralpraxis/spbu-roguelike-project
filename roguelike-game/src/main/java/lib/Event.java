@@ -29,4 +29,9 @@ public class Event {
     public Event.Type getType() {
         return this.type;
     }
+
+    @Override
+    public boolean equals(Object object) {
+        return this.getClass() == object.getClass() && this.type == ((Event) object).getType();
+    }
 }

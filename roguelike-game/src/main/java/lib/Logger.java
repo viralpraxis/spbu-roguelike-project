@@ -1,6 +1,6 @@
 package lib;
 
-class Logger {
+public class Logger {
     private final static String DEFAULT_LEVEL = "INFO";
 
     /**

@@ -47,6 +47,10 @@ public class Player extends Mob {
         posY = y;
     }
 
+    public String getName() {
+        return name;
+    }
+
     @Override
     public String toString() {
         return String.format("Player((%d, %d), H%s, S%s, %s)", posX, posY, health, power, name);

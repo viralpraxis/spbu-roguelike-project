@@ -24,6 +24,20 @@ public class Door extends GameObject {
         return leadsToRoom;
     }
 
+    /** Returns X position this door leads to.
+     * @return A coordinate
+     */
+    public int getLeadsToX() {
+        return leadsToX;
+    }
+
+    /** Returns Y position this door leads to.
+     * @return A coordinate
+     */
+    public int getLeadsToY() {
+        return leadsToY;
+    }
+
     @Override
     public void stepOn(Mob mob) {
         mob.posX = leadsToX;
