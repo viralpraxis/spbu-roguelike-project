@@ -8,10 +8,10 @@ spotless {
   enforceCheck false
 
   java {
-    importOrder()
+    // importOrder()
     removeUnusedImports()
     formatAnnotations()
-    googleJavaFormat()
+    // googleJavaFormat()
   }
 }
 
