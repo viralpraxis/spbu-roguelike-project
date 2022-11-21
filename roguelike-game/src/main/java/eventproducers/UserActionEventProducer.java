@@ -5,7 +5,6 @@ import lib.Event;
 import java.awt.Toolkit;
 import java.awt.AWTEvent;
 import java.awt.event.AWTEventListener;
-import java.awt.event.MouseEvent;
 import java.awt.event.KeyEvent;
 
 public class UserActionEventProducer extends EventProducer {

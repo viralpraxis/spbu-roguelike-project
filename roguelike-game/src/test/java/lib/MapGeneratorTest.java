@@ -1,16 +1,9 @@
 package test.lib;
 
-import java.util.Arrays;
 
-import org.junit.jupiter.api.Test;
 import static org.junit.Assert.*;
-import org.hamcrest.core.IsInstanceOf;
 import static org.junit.matchers.JUnitMatchers.*;
 
-import models.Level;
-import models.Room;
-import models.Door;
-import lib.MapGenerator;
 
 class MapGeneratorTest {
     // @Test

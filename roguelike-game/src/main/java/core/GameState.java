@@ -4,7 +4,6 @@ import models.Level;
 import models.Room;
 import models.Player;
 import repositories.LevelRepository;
-import lib.MapGenerator;
 
 public class GameState {
     private Level level;

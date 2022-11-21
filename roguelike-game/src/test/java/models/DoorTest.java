@@ -1,13 +1,9 @@
 package test.models;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
-import java.io.IOException;
 import java.util.Random;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.Assert.*;
-import org.junit.Before;
 
 import models.Door;
 import models.Mob;
