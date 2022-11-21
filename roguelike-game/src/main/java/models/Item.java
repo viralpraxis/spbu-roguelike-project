@@ -12,6 +12,8 @@ public class Item extends GameObject {
         representation[0][0] = 'i';
         visible = true;
         equipped = false;
+        steppable = true;
+        destroyed = false;
     }
 
     @Override
@@ -21,6 +23,7 @@ public class Item extends GameObject {
 
         Inventory.getInventory().addItem(this);
         visible = false;
+        destroyed = true;
     }
 
     public void changeEquipStatus(Player player) {

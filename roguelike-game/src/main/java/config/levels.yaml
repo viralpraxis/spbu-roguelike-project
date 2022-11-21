@@ -28,6 +28,11 @@ levels:
             x: 37
             y: 13
             name: Sacrificial lamb
+          - type: mob
+            x: 38
+            y: 14
+            health: 200
+            power: 1
     player:
       x: 5
       y: 5

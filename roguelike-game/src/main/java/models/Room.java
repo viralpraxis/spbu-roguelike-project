@@ -61,16 +61,17 @@ public class Room {
             retValue = ((Door) objToStep).leadsTo();
         }
 
-        if (objToStep != null && objToStep instanceof Item) {
-            objects.remove(objId);
-        }
-
-        if (!nextStepOutsideRoom(mob, dx, dy))
-            mob.move(dx, dy);
-
         if (objToStep != null) {
             objToStep.stepOn(mob);
         }
+
+        if (objToStep != null && objToStep.isDestroyed()) {
+            objects.remove(objId);
+            objToStep = null;
+        }
+
+        if ((!nextStepOutsideRoom(mob, dx, dy) && objToStep == null) || (objToStep != null && objToStep.isSteppable()))
+            mob.move(dx, dy);
 
         return retValue;
     }

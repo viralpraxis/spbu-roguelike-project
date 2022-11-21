@@ -4,12 +4,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
-import models.Level;
-import models.Room;
-import models.Door;
-import models.Item;
-import models.GameObject;
-import models.Player;
+import models.*;
 
 
 public class LevelRepository extends Repository {
@@ -87,6 +82,13 @@ public class LevelRepository extends Repository {
                     (Integer) data.get("x"),
                     (Integer) data.get("y"),
                     (String) data.get("name")
+                );
+            case "mob":
+                return new Mob(
+                    (Integer) data.get("x"),
+                    (Integer) data.get("y"),
+                    (Integer) data.get("health"),
+                    (Integer) data.get("power")
                 );
             default:
                 throw new IllegalArgumentException();

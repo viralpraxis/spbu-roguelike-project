@@ -179,11 +179,13 @@ public class Renderer {
         int row = statPosY + 1;
 
         textGraphics.setForegroundColor(TextColor.ANSI.GREEN);
-        textGraphics.putString(column, row, "Health: " + Integer.toString(player.getHealth()));
+        // Empty tail is needed to refresh the specific position on a screen. For example when health gets from 100
+        // to 99 in order to erase last zero we need to explicitly place ' ' instead of it.
+        textGraphics.putString(column, row, "Health: " + Integer.toString(player.getHealth()) + "     ");
 
         textGraphics = screen.newTextGraphics();
         textGraphics.setForegroundColor(TextColor.ANSI.CYAN);
-        textGraphics.putString(column, row + 1, "Attack: " + Integer.toString(player.getPower()));
+        textGraphics.putString(column, row + 1, "Attack: " + Integer.toString(player.getPower()) + "     ");
     }
 
     private void refreshScreenForNextLevel() {
