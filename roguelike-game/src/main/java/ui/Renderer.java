@@ -6,6 +6,7 @@ import models.GameObject;
 import models.Inventory;
 import models.Item;
 import models.Player;
+import repositories.Configuration;
 
 import com.googlecode.lanterna.*;
 import com.googlecode.lanterna.graphics.TextGraphics;
@@ -37,8 +38,8 @@ public class Renderer {
     public Renderer() {
         mapPosX = 0;
         mapPosY = 0;
-        mapWidth = 100;
-        mapHeight = 48;
+        mapWidth = (Integer) Configuration.get("screen.width");
+        mapHeight = (Integer) Configuration.get("screen.height");
         inventoryPosX = 100;
         inventoryPosY = 0;
         inventoryWidth = 30;

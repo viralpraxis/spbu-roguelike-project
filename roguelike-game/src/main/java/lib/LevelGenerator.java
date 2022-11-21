@@ -8,16 +8,16 @@ import java.util.Arrays;
 import core.*;
 import models.*;
 
-public class MapGenerator {
+public class LevelGenerator {
     private static Random randomizer = new Random();
 
     /**
     * This method is used to generate levels.
     * @param width Map wisth.
     * @param height Map height.
-    * @return Level[] Returns an array of initialized levels.
+    * @return Level Returns an initialized levels.
     */
-    public static Level[] generate(int width, int height) {
+    public Level generate(int width, int height) {
         int roomsCount = 2;
         Room[] rooms = new Room[roomsCount];
         int[][] roomPositions = generateRoomPositions(roomsCount, width, height);
@@ -36,12 +36,11 @@ public class MapGenerator {
         }
 
         int[] playerPosition = randomPointInsideRoom(rooms[0]);
-        return new Level[]{
-          new Level(
-              rooms,
-              new Player(playerPosition[0], playerPosition[1])
-          )
-        };
+
+        return new Level(
+            rooms,
+            new Player(playerPosition[0], playerPosition[1])
+        );
     }
 
     private static int[][] generateRoomPositions(int roomsCount, int width, int height) {
