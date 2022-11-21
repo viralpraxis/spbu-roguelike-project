@@ -3,7 +3,7 @@ package core;
 import models.Level;
 import models.Room;
 import models.Player;
-import repositories.LevelRepository;
+import lib.MapGenerator;
 
 public class GameState {
     private Level level;
@@ -12,10 +12,7 @@ public class GameState {
     private int curLevelId = 0;
 
     public GameState() {
-        // FIXME: random level count?
-        this.levels = new Level[5];
-        for (int i = 0; i < 5; i++) { levels[i] = LevelProvider.get(); }
-        this.levels = this.levels;
+        this.levels = MapGenerator.generate();
         this.level = levels[0];
     }
 
