@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import lib.Event;
 
+
 class EventTest {
     @Test
     public void testGetType() {
