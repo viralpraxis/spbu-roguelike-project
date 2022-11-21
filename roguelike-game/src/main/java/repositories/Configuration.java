@@ -21,13 +21,7 @@ public class Configuration extends Repository {
 
     public Object _get(String key) {
         String[] tokens = key.split(KEY_SPLIT_REGEXP);
-
-        System.out.println(tokens.length);
-        for (String s : tokens) { System.out.println(s);}
-
         var currentData = new HashMap<String, Object>(data);
-
-        String value;
 
         for (int i = 0; i < tokens.length - 1; i++) {
             currentData = (HashMap<String, Object>) currentData.get(tokens[i]);

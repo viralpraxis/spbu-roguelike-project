@@ -12,9 +12,11 @@ public class GameState {
     private int curLevelId = 0;
 
     public GameState() {
-        // this.levels = MapGenerator.generate(100, 48);
-        this.levels = new LevelRepository().getLevels();
-        this.level = this.levels[0];
+        // FIXME: random level count?
+        this.levels = new Level[5];
+        for (int i = 0; i < 5; i++) { levels[i] = LevelProvider.get(); }
+        this.levels = this.levels;
+        this.level = levels[0];
     }
 
     /**
