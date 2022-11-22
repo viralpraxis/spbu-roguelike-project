@@ -1,10 +1,11 @@
-package lib;
+package core;
 
 import core.GameState;
 import models.Player;
 import models.Inventory;
+import lib.Logger;
+import lib.Event;
 
-// FIXME: Better naming?
 public class GameStateChanger {
     /**
     * This method is used to apply new event to current game state.

@@ -34,18 +34,12 @@ public class LevelGenerator {
     public Level generate() {
         roomsCount = 5 + randomizer.nextInt(5);
         rooms = new Room[roomsCount];
-        System.out.println("Rooms count: " + roomsCount);
         generateRoomPositions();
         doorPositions = new int[roomsCount][2];
 
         for (int i = 0; i < roomsCount; i++) {
             rooms[i] = generateRoom(i);
         }
-
-        for (int i = 0; i < roomsCount; i++) {
-            System.out.println(roomPositions[i][0] + ":" + roomPositions[i][1]);
-        }
-        System.out.println();
 
         int[] playerPosition = randomPointInsideRoom(new int[]{rooms[0].posX(), rooms[0].posY()}, rooms[0].getSize());
 

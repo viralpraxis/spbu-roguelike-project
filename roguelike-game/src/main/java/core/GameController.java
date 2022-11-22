@@ -1,7 +1,6 @@
 package core;
 
 import lib.Event;
-import lib.GameStateChanger;
 import ui.Renderer;
 
 public class GameController {

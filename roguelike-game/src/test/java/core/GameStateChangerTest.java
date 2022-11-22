@@ -1,4 +1,4 @@
-package test.lib;
+package test.core;
 
 import java.lang.reflect.Field;
 
@@ -13,7 +13,7 @@ import static com.github.stefanbirkner.systemlambda.SystemLambda.*;
 import core.GameState;
 import models.Inventory;
 import lib.Event;
-import lib.GameStateChanger;
+import core.GameStateChanger;
 
 @RunWith(MockitoJUnitRunner.class)
 class GameStateChangerTest {
