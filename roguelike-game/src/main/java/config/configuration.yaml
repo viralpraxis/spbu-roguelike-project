@@ -1,0 +1,8 @@
+screen:
+  width: 100
+  height: 48
+level_generation:
+  predefined_to_generated_ratio: 0.5
+map_generation:
+  minumum_levels_count: 5
+  maximum_levels_count: 15
