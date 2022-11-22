@@ -1,5 +1,8 @@
 package models;
 
+/**
+ * This class represents level which is a container of all resources at the current game level.
+ */
 public class Level {
     private Room[] rooms;
     private Player player;
@@ -52,6 +55,11 @@ public class Level {
         return rooms;
     }
 
+    /**
+     * Get player.
+     *
+     * @return Player
+     */
     public Player getPlayer() {
         return player;
     }

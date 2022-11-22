@@ -1,5 +1,8 @@
 package models;
 
+/**
+ * This class represents an item that player can pick up.
+ */
 public class Item extends GameObject {
     private String name;
     private boolean equipped;
@@ -26,6 +29,11 @@ public class Item extends GameObject {
         destroyed = true;
     }
 
+    /**
+     * Change equip status of an item and alter player stats.
+     *
+     * @param player Player whose stats should be altered
+     */
     public void changeEquipStatus(Player player) {
         if (equipped) {
             equipped = false;
@@ -36,10 +44,20 @@ public class Item extends GameObject {
         }
     }
 
+    /**
+     * Get the name of this item.
+     *
+     * @return name of an item
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Checks whether this item is equipped.
+     *
+     * @return true if item is equipped, false - otherwise
+     */
     public boolean isEquipped() {
         return equipped;
     }

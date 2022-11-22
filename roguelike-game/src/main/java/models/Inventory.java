@@ -18,6 +18,11 @@ public class Inventory {
         lastSelectedItemId = 0;
     }
 
+    /**
+     * Get an instance of Inventory.
+     *
+     * @return instance of Inventory
+     */
     public static Inventory getInventory() {
         if (instance == null) instance = new Inventory();
 
