@@ -23,10 +23,14 @@ public class Configuration extends Repository {
         String[] tokens = key.split(KEY_SPLIT_REGEXP);
         var currentData = new HashMap<String, Object>(data);
 
-        for (int i = 0; i < tokens.length - 1; i++) {
-            currentData = (HashMap<String, Object>) currentData.get(tokens[i]);
-        }
+        try {
+            for (int i = 0; i < tokens.length - 1; i++) {
+                currentData = (HashMap<String, Object>) currentData.get(tokens[i]);
+            }
 
-        return currentData.get(tokens[tokens.length - 1]);
+            return currentData.get(tokens[tokens.length - 1]);
+        } catch (NullPointerException e) {
+            return null;
+        }
     }
 }
