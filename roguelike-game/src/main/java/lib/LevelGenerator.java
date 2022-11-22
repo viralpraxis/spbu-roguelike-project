@@ -18,6 +18,7 @@ public class LevelGenerator {
     private Room[] rooms;
     private int[][] roomPositions;
     private int[][] doorPositions;
+    private int[] roomSizes;
 
     /**
     * This method is used to generate levels.
@@ -25,7 +26,6 @@ public class LevelGenerator {
     * @param height Map height.
     * @return Level Returns initialized levels.
     */
-
     public LevelGenerator(int width, int height) {
         this.width = width;
         this.height = height;
@@ -47,7 +47,7 @@ public class LevelGenerator {
         }
         System.out.println();
 
-        int[] playerPosition = randomPointInsideRoom(new int[]{rooms[0].posX(), rooms[0].posY()});
+        int[] playerPosition = randomPointInsideRoom(new int[]{rooms[0].posX(), rooms[0].posY()}, rooms[0].getSize());
 
         return new Level(
             rooms,
@@ -57,14 +57,16 @@ public class LevelGenerator {
 
     private void generateRoomPositions() {
         roomPositions = new int[roomsCount][2];
+        roomSizes = new int[roomsCount];
 
         for (int i = 0; i < roomsCount; i++) {
             int epoch = 0;
+            int roomSize = 5 + randomizer.nextInt(10);
+            roomSizes[i] = roomSize;
             while (roomPositions[i][0] == 0 && roomPositions[i][1] == 0 && epoch++ >= 0) {
-                int possibleX = randomizer.nextInt(width - 11);
-                int possibleY = randomizer.nextInt(height - 11);
-                System.out.println(possibleX + " " + possibleY + " " + canPlaceRoom(i, possibleX, possibleY));
-                if (canPlaceRoom(i, possibleX, possibleY)) {
+                int possibleX = randomizer.nextInt(width - (roomSize + 1));
+                int possibleY = randomizer.nextInt(height - (roomSize + 1));
+                if (canPlaceRoom(i, possibleX, possibleY, roomSize)) {
                     roomPositions[i] = new int[]{possibleX, possibleY};
                 }
 
@@ -73,16 +75,16 @@ public class LevelGenerator {
         }
     }
 
-    private boolean canPlaceRoom(int index, int x, int y) {
+    private boolean canPlaceRoom(int index, int x, int y, int roomSize) {
         for (int i = 0; i < index; i++) {
-            if (Math.abs(roomPositions[i][0] - x) <= 10 && Math.abs(roomPositions[i][1] - y) <= 10) return false;
+            if (Math.abs(roomPositions[i][0] - x) <= roomSize && Math.abs(roomPositions[i][1] - y) <= roomSize) return false;
         }
 
         return true;
     }
 
     private int[] generateDoorPosition(int roomIndex) {
-        return randomPointInRoomBound(roomPositions[roomIndex][0], roomPositions[roomIndex][1], 10);
+        return randomPointInRoomBound(roomPositions[roomIndex][0], roomPositions[roomIndex][1], roomSizes[roomIndex]);
     }
 
     private Room generateRoom(int index) {
@@ -90,7 +92,8 @@ public class LevelGenerator {
             index == 0,
             roomPositions[index][0],
             roomPositions[index][1],
-            generateGameObject(index)
+            generateGameObject(index),
+            roomSizes[index]
         );
     }
 
@@ -107,7 +110,7 @@ public class LevelGenerator {
                     doorPosition[1],
                     prevDoorPosition[0],
                     prevDoorPosition[1],
-                    (roomIndex - 1)
+                    roomIndex - 1
                 )
             );
 
@@ -124,7 +127,7 @@ public class LevelGenerator {
 
         int itemsCount = randomizer.nextInt(2);
         for (int i = 0; i < itemsCount; i++) {
-            int[] itemPosition = randomPointInsideRoom(roomPositions[i]);
+            int[] itemPosition = randomPointInsideRoom(roomPositions[i], roomSizes[roomIndex]);
             gameObjects.add(new Item(itemPosition[0], itemPosition[1], "foo-bar"));
         }
 
@@ -144,10 +147,10 @@ public class LevelGenerator {
         return points[randomizer.nextInt(points.length)];
     }
 
-    private int[] randomPointInsideRoom(int[] roomPosition) {
+    private int[] randomPointInsideRoom(int[] roomPosition, int size) {
         return new int[]{
-            roomPosition[0] + 1 + randomizer.nextInt(10 - 1),
-            roomPosition[1] + 1 + randomizer.nextInt(10 - 1)
+            roomPosition[0] + 1 + randomizer.nextInt(size - 1),
+            roomPosition[1] + 1 + randomizer.nextInt(size - 1)
         };
     }
 }

@@ -62,7 +62,8 @@ class LevelTest {
             false,
             randomInt(),
             randomInt(),
-            roomObjects
+            roomObjects,
+            10
         );
 
         return room;
@@ -73,7 +74,8 @@ class LevelTest {
             false,
             randomInt(),
             randomInt(),
-            new ArrayList<GameObject>()
+            new ArrayList<GameObject>(),
+            10
         );
     }
 

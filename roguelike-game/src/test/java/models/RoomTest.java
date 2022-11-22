@@ -27,7 +27,8 @@ class RoomTest {
             false,
             randomInt(),
             randomInt(),
-            roomObjects
+            roomObjects,
+            10
         );
 
         assertEquals(true, room.containsMobs());
@@ -42,7 +43,8 @@ class RoomTest {
             false,
             randomInt(),
             randomInt(),
-            roomObjects
+            roomObjects,
+            10
         );
 
         assertEquals(true, room.containsMobs());
@@ -54,7 +56,8 @@ class RoomTest {
             false,
             randomInt(),
             randomInt(),
-            new ArrayList<GameObject>()
+            new ArrayList<GameObject>(),
+            10
         );
 
         room.makeVisible();
@@ -68,7 +71,8 @@ class RoomTest {
             true,
             randomInt(),
             randomInt(),
-            new ArrayList<GameObject>()
+            new ArrayList<GameObject>(),
+            10
         );
 
         assertEquals(true, room.isVisible());
@@ -81,7 +85,8 @@ class RoomTest {
             false,
             randomInt(),
             randomInt(),
-            new ArrayList<GameObject>()
+            new ArrayList<GameObject>(),
+            10
         );
 
         assertEquals(false, room.isVisible());
@@ -94,7 +99,8 @@ class RoomTest {
             false,
             randomInt(),
             randomInt(),
-            roomObjects
+            roomObjects,
+            10
         );
 
         assertEquals(roomObjects, room.getRoomContent());
