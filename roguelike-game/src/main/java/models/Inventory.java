@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * This class represents players inventory.
+ * This class represents player's inventory.
  */
 public class Inventory {
     private static Inventory instance;
