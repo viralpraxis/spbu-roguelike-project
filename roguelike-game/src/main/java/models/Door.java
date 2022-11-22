@@ -1,5 +1,8 @@
 package models;
 
+/**
+ * This class represents a door which can lead to any room.
+ */
 public class Door extends GameObject {
     private final int leadsToX;
     private final int leadsToY;

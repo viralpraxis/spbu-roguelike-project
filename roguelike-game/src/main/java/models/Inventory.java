@@ -3,6 +3,9 @@ package models;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class represents players inventory.
+ */
 public class Inventory {
     private static Inventory instance;
     private List<Item> items;

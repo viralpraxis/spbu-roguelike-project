@@ -1,5 +1,8 @@
 package models;
 
+/**
+ * This class represents basic object that can be rendered.
+ */
 public abstract class GameObject {
     protected String title;
     protected char[][] representation;
