@@ -33,6 +33,13 @@ levels:
             y: 14
             health: 200
             power: 1
+            behavior: coward
+          - type: mob
+            x: 38
+            y: 13
+            health: 200
+            power: 1
+            behavior: aggressive
     player:
       x: 5
       y: 5

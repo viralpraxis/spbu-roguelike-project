@@ -5,6 +5,7 @@ public class Mob extends GameObject {
     protected int basePower;
     protected int health;
     protected int power;
+    private MobBehavior mobBehavior;
 
     public Mob(int posX, int posY, int health, int power) {
         this.posX = posX;
@@ -18,6 +19,30 @@ public class Mob extends GameObject {
         this.representation = new char[1][1];
         this.representation[0][0] = 'm';
         this.visible = true;
+
+        mobBehavior = new CowardMobBehavior();
+    }
+
+    /**
+     * Set behavior to this mob.
+     *
+     * @param behavior String description of behavior of the mob. Three types of behavior are allowed:
+     *                 "aggressive", "coward", "passive".
+     */
+    public void setMobBehavior(String behavior) {
+        switch (behavior) {
+            case ("aggressive"):
+                mobBehavior = new AggressiveMobBehavior();
+                break;
+            case ("coward"):
+                mobBehavior = new CowardMobBehavior();
+                break;
+            case ("passive"):
+                mobBehavior = new PassiveMobBehavior();
+                break;
+            default:
+                throw new IllegalArgumentException();
+        }
     }
 
     /**
@@ -38,6 +63,9 @@ public class Mob extends GameObject {
         health -= mob.power;
         if (health <= 0)
             destroyed = true;
+        if (mob.getHealth() <= 0) {
+
+        }
     }
 
     /**
@@ -56,5 +84,9 @@ public class Mob extends GameObject {
      */
     public int getPower() {
         return power;
+    }
+
+    public void makeNextMove(Mob mob, Room room) {
+        mobBehavior.makeNextMove(mob, this, room);
     }
 }

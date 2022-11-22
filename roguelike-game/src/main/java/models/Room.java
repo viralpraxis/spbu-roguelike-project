@@ -45,6 +45,8 @@ public class Room {
         int x = mob.posX() + dx;
         int y = mob.posY() + dy;
 
+        moveMobsInRoom(mob);
+
         int objId = 0;
         for (GameObject obj : objects) {
             if (obj.posX() == x && obj.posY() == y) {
@@ -128,6 +130,22 @@ public class Room {
         return objects;
     }
 
+    /**
+     * Checks whether this room contains mob at a given position.
+     *
+     * @param x x position of a cell in which to check for mob
+     * @param y y position of a cell in which to check for mob
+     * @return true if room contains mob at the cell (x,y), false - otherwise
+     */
+    public boolean containsMobAtPos(int x, int y) {
+        for (GameObject obj : objects) {
+            if (obj.posX() == x && obj.posY() == y && obj instanceof Mob) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     private boolean nextStepOutsideRoom(Mob mob, int dx, int dy) {
         if (mob.posX() + dx + 1 >= posX + size)
             return true;
@@ -138,5 +156,13 @@ public class Room {
         if (mob.posY() + dy <= posY)
             return true;
         return false;
+    }
+
+    private void moveMobsInRoom(Mob mob) {
+        for (GameObject object: objects) {
+            if (object instanceof Mob) {
+                ((Mob) object).makeNextMove(mob, this);
+            }
+        }
     }
 }

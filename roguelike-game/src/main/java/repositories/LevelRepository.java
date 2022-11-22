@@ -84,12 +84,14 @@ public class LevelRepository extends Repository {
                     (String) data.get("name")
                 );
             case "mob":
-                return new Mob(
+                Mob mob = new Mob(
                     (Integer) data.get("x"),
                     (Integer) data.get("y"),
                     (Integer) data.get("health"),
                     (Integer) data.get("power")
                 );
+                mob.setMobBehavior((String) data.get("behavior"));
+                return mob;
             default:
                 throw new IllegalArgumentException();
         }
