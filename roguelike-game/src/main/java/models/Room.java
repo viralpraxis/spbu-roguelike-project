@@ -1,6 +1,7 @@
 package models;
 
 import java.util.List;
+import java.util.LinkedList;
 
 public class Room {
     private final int posX;
@@ -69,6 +70,11 @@ public class Room {
 
         if (objToStep != null) {
             objToStep.stepOn(mob);
+
+            if (objToStep instanceof Mob) {
+                objects.add(new ConfusedMob((Mob) objToStep));
+                objects.remove(objId);
+            }
         }
 
         if (objToStep != null && objToStep.isDestroyed()) {
@@ -163,10 +169,18 @@ public class Room {
     }
 
     private void moveMobsInRoom(Mob mob) {
+        List<GameObject> deleteList = new LinkedList<>();
+
         for (GameObject object: objects) {
             if (object instanceof Mob) {
                 ((Mob) object).makeNextMove(mob, this);
+                if (((Mob) object).isDestroyed())
+                    deleteList.add(object);
             }
+        }
+
+        for (GameObject destroyedObj: deleteList) {
+            objects.remove(destroyedObj);
         }
     }
 }

@@ -10,6 +10,8 @@ public class Mob extends GameObject {
     private int level;
     private int experienceForKill;
 
+    public Mob() {}
+
     public Mob(int posX, int posY, int health, int power) {
         this.posX = posX;
         this.posY = posY;
@@ -98,6 +100,11 @@ public class Mob extends GameObject {
         if (health <= 0) {
             destroyed = true;
             mob.addExperience(experienceForKill);
+        }
+
+        if (mob.health <= 0) {
+            mob.destroyed = true;
+            this.addExperience(mob.experienceForKill);
         }
     }
 
