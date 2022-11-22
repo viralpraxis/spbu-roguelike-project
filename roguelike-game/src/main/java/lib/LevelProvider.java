@@ -33,10 +33,7 @@ class LevelProvider {
         if (predefinedLevelsIterator.hasNext() && shouldUsePredefinedLevel()) {
             return predefinedLevelsIterator.next();
         } else {
-            return levelGenerator.generate(
-                (Integer) Configuration.get("screen.width"),
-                (Integer) Configuration.get("screen.height")
-            );
+            return levelGenerator.generate();
         }
     }
 
@@ -49,7 +46,10 @@ class LevelProvider {
         Collections.shuffle(levelsList);
         this.predefinedLevelsIterator = levelsList.iterator();
 
-        this.levelGenerator = new LevelGenerator();
+        this.levelGenerator = new LevelGenerator(
+            (Integer) Configuration.get("screen.width"),
+            (Integer) Configuration.get("screen.height")
+        );
         this.predefinedToGeneratedRatio = (Double) Configuration.get("level_generation.predefined_to_generated_ratio");
 
         this.isInitialized = true;

@@ -41,7 +41,8 @@ public class LevelRepository extends Repository {
                     (Boolean) room.get("visible"),
                     (Integer) room.get("x"),
                     (Integer) room.get("y"),
-                    buildGameObjects((ArrayList<LinkedHashMap>) room.get("objects"))
+                    buildGameObjects((ArrayList<LinkedHashMap>) room.get("objects")),
+                    (Integer) room.get("size")
                 );
             }
             targetLevels[levelIndex++] = new Level(

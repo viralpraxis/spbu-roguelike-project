@@ -10,12 +10,12 @@ public class Room {
     private boolean visible;
     private List<GameObject> objects;
 
-    public Room(boolean visible, int posX, int posY, List<GameObject> objects) {
+    public Room(boolean visible, int posX, int posY, List<GameObject> objects, int size) {
         this.visible = visible;
         this.posX = posX;
         this.posY = posY;
         this.objects = objects;
-        this.size = 10;
+        this.size = size;
     }
 
     /**

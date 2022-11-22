@@ -3,6 +3,7 @@ levels:
       - visible: true
         x: 0
         y: 0
+        size: 10
         objects:
           - type: door
             x: 9
@@ -17,6 +18,7 @@ levels:
       - visible: false
         x: 30
         y: 10
+        size: 10
         objects:
           - type: door
             x: 39
@@ -47,6 +49,7 @@ levels:
       - visible: true
         x: 30
         y: 0
+        size: 10
         objects:
           - type: door
             x: 35
@@ -61,6 +64,7 @@ levels:
       - visible: false
         x: 3
         y: 20
+        size: 10
         objects:
           - type: door
             x: 3
