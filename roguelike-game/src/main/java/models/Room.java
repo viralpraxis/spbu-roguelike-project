@@ -48,12 +48,16 @@ public class Room {
         moveMobsInRoom(mob);
 
         int objId = 0;
+        int idx = 0;
         for (GameObject obj : objects) {
             if (obj.posX() == x && obj.posY() == y) {
                 objToStep = obj;
-                break;
+                objId = idx;
+                if (objToStep instanceof Mob) {
+                    break;
+                }
             }
-            objId += 1;
+            idx += 1;
         }
 
         int retValue = -1;

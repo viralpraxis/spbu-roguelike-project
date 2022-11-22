@@ -6,8 +6,10 @@ public class AggressiveMobBehavior implements MobBehavior {
         int deltaX = mob.posX() - player.posX();
         int deltaY = mob.posY() - player.posY();
 
-        if (Math.abs(deltaX) == 1 && deltaY == 0 || deltaX == 0 && Math.abs(deltaY) == 1)
+        if (Math.abs(deltaX) == 1 && deltaY == 0 || deltaX == 0 && Math.abs(deltaY) == 1) {
+            player.stepOn(mob);
             return;
+        }
 
         if (deltaX == 0 && !room.containsMobAtPos(mob.posX(), mob.posY() - Integer.signum(deltaY)))
             mob.move(0, -Integer.signum(deltaY));
