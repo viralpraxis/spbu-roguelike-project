@@ -21,11 +21,11 @@ public class Level {
      *
      * @return true if level is finished, false - otherwise
      */
-    // FIXME: ignore Player
     public boolean isFinished() {
         for (Room room : rooms) {
             if (room.containsMobs()) return false;
         }
+
         return true;
     }
 
