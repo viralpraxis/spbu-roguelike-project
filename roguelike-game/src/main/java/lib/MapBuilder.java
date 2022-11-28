@@ -3,6 +3,7 @@ package lib;
 import java.util.Objects;
 
 import models.Level;
+import models.mobs.MobGeneratorFactory;
 import repositories.MapRepository;
 
 public class MapBuilder {
@@ -10,6 +11,7 @@ public class MapBuilder {
   private Size size;
   private int minimumLevelsCount;
   private int maximumLevelsCount;
+  private MobGeneratorFactory mobGeneratorFactory;
 
   public enum GenerationMethod {
     PREDEFINED,
@@ -77,6 +79,12 @@ public class MapBuilder {
     if (count <= 0) throw new IllegalArgumentException("Count must be positive");
 
     this.maximumLevelsCount = count;
+
+    return this;
+  }
+
+  public MapBuilder setMobGeneratorFactory(MobGeneratorFactory mobGeneratorFactory) {
+    this.mobGeneratorFactory = mobGeneratorFactory;
 
     return this;
   }
