@@ -4,17 +4,17 @@ import java.util.Random;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-import models.mobs.SFMobGeneratorFactory;
+import models.mobs.SciFiMobGeneratorFactory;
 import models.mobs.Mob;
 import models.mobs.CyborgChainsawMob;
 import models.mobs.DroidShooterMob;
 
-public class SFMobGeneratorFactoryTest {
+public class SciFiMobGeneratorFactoryTest {
     private Random random = new Random();
 
     @Test
     public void testCreateStrongMob() {
-        var factory = new SFMobGeneratorFactory();
+        var factory = new SciFiMobGeneratorFactory();
         int posX = randomInt();
         int posY = randomInt();
         Mob mob = factory.createStrongMob(posX, posY);
@@ -27,7 +27,7 @@ public class SFMobGeneratorFactoryTest {
 
     @Test
     public void testCreateWeakMob() {
-        var factory = new SFMobGeneratorFactory();
+        var factory = new SciFiMobGeneratorFactory();
         int posX = randomInt();
         int posY = randomInt();
         Mob mob = factory.createWeakMob(posX, posY);
