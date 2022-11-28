@@ -3,7 +3,6 @@ package test.core;
 import java.lang.reflect.Field;
 
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.mockito.*;
 import org.junit.After;
 import org.junit.runner.RunWith;

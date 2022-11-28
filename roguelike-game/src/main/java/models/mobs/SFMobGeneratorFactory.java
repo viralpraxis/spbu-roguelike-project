@@ -1,4 +1,5 @@
-package models;
+package models.mobs;
+
 
 /**
  * This class represents a concrete factory that can create science-fiction mobs.

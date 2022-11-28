@@ -1,11 +1,11 @@
-package test.models;
+package test.models.mobs;
 
 import java.util.Random;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-import models.Player;
+import models.mobs.Player;
 
 class PlayerTest {
     private Player player;

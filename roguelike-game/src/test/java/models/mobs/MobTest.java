@@ -1,11 +1,11 @@
-package test.models;
+package test.models.mobs;
 
 import java.util.Random;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-import models.Mob;
+import models.mobs.Mob;
 
 
 class MobTest {

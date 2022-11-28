@@ -5,9 +5,8 @@ import models.Room;
 import models.GameObject;
 import models.Inventory;
 import models.Item;
-import models.Player;
+import models.mobs.Player;
 import lib.Size;
-import repositories.Configuration;
 
 import com.googlecode.lanterna.*;
 import com.googlecode.lanterna.graphics.TextGraphics;

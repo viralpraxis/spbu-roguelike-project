@@ -1,7 +1,6 @@
 package core;
 
-import core.GameState;
-import models.Player;
+import models.mobs.Player;
 import models.Inventory;
 import lib.Logger;
 import lib.Event;

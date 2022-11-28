@@ -1,5 +1,8 @@
 package models;
 
+import models.mobs.Mob;
+import models.mobs.Player;
+
 /**
  * This class represents an item that player can pick up.
  */

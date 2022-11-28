@@ -1,4 +1,5 @@
-package models;
+package models.mobs;
+
 
 /**
  * Concrete descendant of StrongMob class that is used by science-fiction factory.

@@ -3,6 +3,8 @@ package models;
 import java.util.List;
 import java.util.LinkedList;
 
+import models.mobs.*;
+
 public class Room {
     private final int posX;
     private final int posY;

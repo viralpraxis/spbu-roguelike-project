@@ -1,7 +1,6 @@
 package core;
 
 import lib.Event;
-import lib.Size;
 import ui.Renderer;
 import repositories.Configuration;
 

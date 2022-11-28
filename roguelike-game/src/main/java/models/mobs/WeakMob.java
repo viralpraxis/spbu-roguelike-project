@@ -1,4 +1,5 @@
-package models;
+package models.mobs;
+
 
 public class WeakMob extends Mob {
     public WeakMob(int posX, int posY, int health, int strength) {

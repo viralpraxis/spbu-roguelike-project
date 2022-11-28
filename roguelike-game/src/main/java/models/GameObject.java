@@ -1,5 +1,7 @@
 package models;
 
+import models.mobs.Mob;
+
 /**
  * This class represents basic object that can be rendered.
  */

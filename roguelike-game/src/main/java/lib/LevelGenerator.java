@@ -3,10 +3,10 @@ package lib;
 import java.util.Random;
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import core.*;
 import models.*;
+import models.mobs.Player;
 
 public class LevelGenerator {
     private static Random randomizer = new Random();

@@ -3,7 +3,6 @@ package lib;
 import java.util.Random;
 
 import models.Level;
-import repositories.Configuration;
 
 public class MapGenerator {
     private LevelGenerator levelGenerator;

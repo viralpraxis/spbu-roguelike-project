@@ -3,6 +3,8 @@ package models;
 import java.util.ArrayList;
 import java.util.List;
 
+import models.mobs.Player;
+
 /**
  * This class represents player's inventory.
  */

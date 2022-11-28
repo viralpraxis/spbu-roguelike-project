@@ -8,8 +8,8 @@ import org.junit.jupiter.api.BeforeEach;
 import static org.junit.jupiter.api.Assertions.*;
 
 import models.Item;
-import models.Player;
-import models.Mob;
+import models.mobs.Player;
+import models.mobs.Mob;
 import models.Inventory;
 
 

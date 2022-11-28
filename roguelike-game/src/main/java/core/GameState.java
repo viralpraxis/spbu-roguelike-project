@@ -2,8 +2,7 @@ package core;
 
 import models.Level;
 import models.Room;
-import models.Player;
-import lib.Size;
+import models.mobs.Player;
 import lib.MapBuilder;
 import repositories.Configuration;
 

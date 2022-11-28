@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.Assert.*;
 
 import models.Door;
-import models.Mob;
+import models.mobs.Mob;
 
 class DoorTest {
     private Door door;

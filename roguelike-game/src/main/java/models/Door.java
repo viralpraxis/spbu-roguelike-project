@@ -1,5 +1,7 @@
 package models;
 
+import models.mobs.Mob;
+
 /**
  * This class represents a door which can lead to any room.
  */

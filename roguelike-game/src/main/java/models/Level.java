@@ -1,5 +1,7 @@
 package models;
 
+import models.mobs.Player;
+
 /**
  * This class represents level which is a container of all resources at the current game level.
  */

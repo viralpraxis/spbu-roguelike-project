@@ -1,4 +1,6 @@
-package models;
+package models.mobs;
+
+import models.Room;
 
 public class PassiveMobBehavior implements MobBehavior {
     @Override

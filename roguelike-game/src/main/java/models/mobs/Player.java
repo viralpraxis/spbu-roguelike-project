@@ -1,4 +1,5 @@
-package models;
+package models.mobs;
+
 
 enum Gender {
     MALE,

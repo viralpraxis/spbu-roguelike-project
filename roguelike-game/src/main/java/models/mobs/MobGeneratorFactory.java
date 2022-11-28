@@ -1,4 +1,5 @@
-package models;
+package models.mobs;
+
 
 /**
  * Abstract factory that can create different types of mobs.

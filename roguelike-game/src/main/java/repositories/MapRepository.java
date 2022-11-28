@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
 import models.*;
+import models.mobs.*;
 
 
 public class MapRepository extends Repository {

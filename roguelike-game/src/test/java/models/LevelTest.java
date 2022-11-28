@@ -10,8 +10,8 @@ import static org.junit.jupiter.api.Assertions.*;
 import models.GameObject;
 import models.Level;
 import models.Room;
-import models.Mob;
-import models.Player;
+import models.mobs.Mob;
+import models.mobs.Player;
 
 class LevelTest {
     private Level level;

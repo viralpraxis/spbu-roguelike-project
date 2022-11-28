@@ -1,4 +1,5 @@
-package models;
+package models.mobs;
+
 
 /**
  * Concrete descendant of WeakMob class that is used by fantasy factory.

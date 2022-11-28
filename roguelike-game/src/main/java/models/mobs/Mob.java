@@ -1,4 +1,7 @@
-package models;
+package models.mobs;
+
+import models.GameObject;
+import models.Room;
 
 public class Mob extends GameObject {
     protected int baseHealth;

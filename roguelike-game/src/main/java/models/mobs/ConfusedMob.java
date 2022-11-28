@@ -1,6 +1,7 @@
-package models;
+package models.mobs;
 
 import java.util.Random;
+import models.Room;
 
 public class ConfusedMob extends Mob {
     private Mob mob;
