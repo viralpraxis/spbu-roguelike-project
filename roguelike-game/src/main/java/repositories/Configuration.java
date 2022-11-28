@@ -1,6 +1,10 @@
 package repositories;
 
 import java.util.HashMap;
+
+import models.mobs.MobGeneratorFactory;
+import models.mobs.SciFiMobGeneratorFactory;
+import models.mobs.FantasyMobGeneratorFactory;
 import lib.Size;
 
 public class Configuration extends Repository {
@@ -24,6 +28,15 @@ public class Configuration extends Repository {
         (Integer) get("map.width"),
         (Integer) get("map.height")
       );
+    }
+
+    public static MobGeneratorFactory getMobGeneratorFactory() {
+      switch ((String) get("mobs_style")) {
+        case "scifi": return new SciFiMobGeneratorFactory();
+        case "fantasy": return new FantasyMobGeneratorFactory();
+        default:
+          return new SciFiMobGeneratorFactory();
+      }
     }
 
     public Object _get(String key) {

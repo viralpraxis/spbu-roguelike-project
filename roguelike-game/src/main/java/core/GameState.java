@@ -17,6 +17,7 @@ public class GameState {
         mapBuilder
           .setGenerationMethod(MapBuilder.GenerationMethod.PREDEFINED)
           .setSize(Configuration.getMapSize())
+          .setMobGeneratorFactory(Configuration.getMobGeneratorFactory())
           .setLevelsCount(4, 8);
 
         this.levels = mapBuilder.build();
