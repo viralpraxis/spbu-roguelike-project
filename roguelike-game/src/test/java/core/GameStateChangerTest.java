@@ -132,18 +132,6 @@ class GameStateChangerTest {
         Mockito.verify(mockedGameState).tryMoveToNextLevel();
     }
 
-    @Test
-    public void testCallWithGameExitEvent() throws Exception {
-        GameState gameState = new GameState();
-        Event event = new Event(Event.Type.GAME_EXIT);
-
-        int exitCode = catchSystemExit(() -> {
-            perform(gameState, event);
-        });
-
-        assertEquals(0, exitCode);
-    }
-
     private void mockInventorySingletonInstance(Inventory inventory) {
         try {
             Field instance = Inventory.class.getDeclaredField("instance");

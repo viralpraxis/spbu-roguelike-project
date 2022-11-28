@@ -11,7 +11,7 @@ import repositories.Configuration;
 class ConfigurationTest {
     @Test
     public void testGet_withExisingKey() {
-        Object result = Configuration.get("screen.width");
+        Object result = Configuration.get("map.width");
 
         assertTrue(result instanceof Integer);
     }

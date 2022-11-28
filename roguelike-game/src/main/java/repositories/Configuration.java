@@ -1,7 +1,7 @@
 package repositories;
 
 import java.util.HashMap;
-
+import lib.Size;
 
 public class Configuration extends Repository {
     private final String KEY_SPLIT_REGEXP = "\\.";
@@ -17,6 +17,13 @@ public class Configuration extends Repository {
         if (instance == null) { instance = new Configuration(); }
 
         return instance._get(key);
+    }
+
+    public static Size getMapSize() {
+      return new Size(
+        (Integer) get("map.width"),
+        (Integer) get("map.height")
+      );
     }
 
     public Object _get(String key) {

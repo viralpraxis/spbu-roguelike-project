@@ -6,6 +6,7 @@ import models.GameObject;
 import models.Inventory;
 import models.Item;
 import models.Player;
+import lib.Size;
 import repositories.Configuration;
 
 import com.googlecode.lanterna.*;
@@ -18,41 +19,42 @@ import com.googlecode.lanterna.screen.TerminalScreen;
 import java.io.IOException;
 
 public class Renderer {
+    private final int INVENTORY_WIDTH = 30;
+    private final int INVENTORY_HEIGHT = 20;
+
+    private final int STATISTICS_WIDTH = 30;
+    private final int STATISTICS_HEIGHT = 5;
+
     private Terminal terminal;
     private Screen screen;
 
-    private final int mapPosX;
-    private final int mapPosY;
     private final int mapWidth;
     private final int mapHeight;
+
+    private final int mapPosX;
+    private final int mapPosY;
     private final int inventoryPosX;
     private final int inventoryPosY;
-    private final int inventoryWidth;
-    private final int inventoryHeight;
     private final int statPosX;
     private final int statPosY;
-    private final int statWidth;
-    private final int statHeight;
     private int currentLevel;
 
-    public Renderer() {
+    public Renderer(Size size) {
+        mapWidth = size.width();
+        mapHeight = size.height();
+
         mapPosX = 0;
         mapPosY = 0;
-        mapWidth = (Integer) Configuration.get("screen.width");
-        mapHeight = (Integer) Configuration.get("screen.height");
-        inventoryPosX = 100;
+        inventoryPosX = mapWidth;
         inventoryPosY = 0;
-        inventoryWidth = 30;
-        inventoryHeight = 20;
-        statPosX = 100;
+        statPosX = mapWidth;
         statPosY = 19;
-        statWidth = 30;
-        statHeight = 5;
+
         currentLevel = -1;
 
         try {
             DefaultTerminalFactory dtf = new DefaultTerminalFactory();
-            dtf.setInitialTerminalSize(new TerminalSize(130, 48));
+            dtf.setInitialTerminalSize(new TerminalSize(mapWidth + INVENTORY_WIDTH, mapHeight));
 
             terminal = dtf.createTerminal();
 
@@ -72,10 +74,10 @@ public class Renderer {
     }
 
     private void drawUtilitiesFrame() {
-        drawFrame(inventoryPosX, inventoryPosY, inventoryWidth, inventoryHeight);
-        drawFrame(statPosX, statPosY, statWidth, statHeight);
+        drawFrame(inventoryPosX, inventoryPosY, INVENTORY_WIDTH, INVENTORY_HEIGHT);
+        drawFrame(statPosX, statPosY, STATISTICS_WIDTH, STATISTICS_HEIGHT);
         screen.setCharacter(statPosX, statPosY, new TextCharacter(Symbols.SINGLE_LINE_T_DOUBLE_RIGHT));
-        screen.setCharacter(statPosX + statWidth-1, statPosY, new TextCharacter(Symbols.SINGLE_LINE_T_DOUBLE_LEFT));
+        screen.setCharacter(statPosX + STATISTICS_WIDTH-1, statPosY, new TextCharacter(Symbols.SINGLE_LINE_T_DOUBLE_LEFT));
     }
 
     private void drawFrame(int x, int y, int width, int height) {

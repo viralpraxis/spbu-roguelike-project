@@ -7,19 +7,20 @@ import java.util.LinkedHashMap;
 import models.*;
 
 
-public class LevelRepository extends Repository {
+public class MapRepository extends Repository {
     private Level[] levels;
 
     @Override
     String getDatasourceFilepath() {
-        return "src/main/java/config/levels.yaml";
+        return "src/main/java/config/maps.yaml";
     }
 
     /**
     * This method is used to retrieve levels.
     * @return Level[] Returns retrieved levels.
     */
-    public Level[] getLevels() {
+    // FIXME: getMap() -> getMaps()
+    public Level[] getMap() {
         if (this.levels != null) { return this.levels; }
 
         ArrayList<LinkedHashMap> levels = (ArrayList<LinkedHashMap>) data.get("levels");

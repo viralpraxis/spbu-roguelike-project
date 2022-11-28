@@ -6,32 +6,26 @@ import models.Level;
 import repositories.Configuration;
 
 public class MapGenerator {
-    private static MapGenerator instance;
+    private LevelGenerator levelGenerator;
 
-    private int minLevelsAmount;
-    private int maxLevelsAmount;
+    private Size size;
+    private int minLevelsCount;
+    private int maxLevelsCount;
 
-    public static Level[] generate() {
-        if (instance == null) instance = new MapGenerator();
+    public MapGenerator(Size size, int minLevelsCount, int maxLevelsCount) {
+        this.levelGenerator = new LevelGenerator(size);
 
-        return instance._generate();
+        this.size = size;
+        this.minLevelsCount = minLevelsCount;
+        this.maxLevelsCount = maxLevelsCount;
     }
 
-    private MapGenerator() {
-        initialize();
-    }
+    public Level[] generate() {
+        int levelsCount = new Random().nextInt(maxLevelsCount - minLevelsCount) + minLevelsCount;
+        Level[] levels = new Level[levelsCount];
 
-    private Level[] _generate() {
-        var levelsAmount = new Random().nextInt(maxLevelsAmount - minLevelsAmount) + minLevelsAmount;
-        var levels = new Level[levelsAmount];
-
-        for (int i = 0; i < levelsAmount; i++) levels[i] = LevelProvider.get();
+        for (int i = 0; i < levelsCount; i++) levels[i] = levelGenerator.generate();
 
         return levels;
-    }
-
-    private void initialize() {
-        this.minLevelsAmount = (Integer) Configuration.get("map_generation.minumum_levels_count");
-        this.maxLevelsAmount = (Integer) Configuration.get("map_generation.maximum_levels_count");
     }
 }
