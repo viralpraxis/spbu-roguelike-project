@@ -5,6 +5,7 @@ import java.util.Objects;
 import models.Level;
 import models.mobs.MobGeneratorFactory;
 import repositories.MapRepository;
+import lib.Interval;
 
 public class MapBuilder {
   private GenerationMethod generationMethod;
@@ -56,29 +57,11 @@ public class MapBuilder {
     return this;
   }
 
-  public MapBuilder setLevelsCount(int minimum, int maximum) {
-    if (minimum <= 0 || maximum <= 0) throw new IllegalArgumentException("Minimum and maximum should be positive");
-    if (minimum > maximum) throw new IllegalArgumentException("Minimum should be lower than maximum");
+  public MapBuilder setLevelsCountInterval(Interval<Integer> interval) {
+    if (interval.left() <= 0 || interval.right() <= 0) throw new IllegalArgumentException("Minimum and maximum should be positive");
 
-    this.minimumLevelsCount = minimum;
-    this.maximumLevelsCount = maximum;
-
-    return this;
-  }
-
-  public MapBuilder setLevelsCount(int count) {
-    if (count <= 0) throw new IllegalArgumentException("Count should be positive");
-
-    this.minimumLevelsCount = count;
-    this.maximumLevelsCount = count;
-
-    return this;
-  }
-
-  public MapBuilder setMaximumLevelsCount(int count) {
-    if (count <= 0) throw new IllegalArgumentException("Count must be positive");
-
-    this.maximumLevelsCount = count;
+    this.minimumLevelsCount = interval.left();
+    this.maximumLevelsCount = interval.right();
 
     return this;
   }

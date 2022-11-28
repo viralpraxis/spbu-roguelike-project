@@ -2,3 +2,6 @@ mobs_style: scifi
 map:
   width: 120
   height: 60
+  generation:
+    min_levels_count: 4
+    max_levels_count: 8
