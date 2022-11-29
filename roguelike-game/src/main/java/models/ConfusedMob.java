@@ -10,8 +10,6 @@ public class ConfusedMob extends Mob {
     public ConfusedMob(Mob mob) {
         this.mob = mob;
 
-        this.representation = new char[1][1];
-        this.representation[0][0] = 'c';
         timeLeft = 5;
         rand = new Random();
     }
@@ -44,11 +42,6 @@ public class ConfusedMob extends Mob {
     @Override
     public void move(int dx, int dy) {
         mob.move(dx, dy);
-    }
-
-    @Override
-    public char[][] getRepresentation() {
-        return representation;
     }
 
     @Override
@@ -88,7 +81,6 @@ public class ConfusedMob extends Mob {
             timeLeft -= 1;
             makeRandomMove(player, room);
         } else {
-            representation[0][0] = 'm';
             mob.makeNextMove(player, room);
         }
     }

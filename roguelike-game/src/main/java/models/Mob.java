@@ -21,8 +21,6 @@ public class Mob extends GameObject {
         this.health = baseHealth;
         this.power = basePower;
 
-        this.representation = new char[1][1];
-        this.representation[0][0] = 'm';
         this.visible = true;
 
         mobBehavior = new CowardMobBehavior();

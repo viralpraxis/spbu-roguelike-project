@@ -15,9 +15,6 @@ public class Door extends GameObject {
         this.leadsToY = leadsToY;
         this.leadsToRoom = leadsToRoom;
         this.visible = true;
-
-        representation = new char[1][1];
-        representation[0][0] = '+';
     }
 
     /** Returns the room id to which the door leads.
