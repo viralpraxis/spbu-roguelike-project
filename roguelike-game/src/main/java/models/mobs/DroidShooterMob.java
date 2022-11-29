@@ -4,7 +4,7 @@ package models.mobs;
  * Concrete descendant of WeakMob class that is used by science-fiction factory.
  */
 public class DroidShooterMob extends WeakMob implements ClonableMob {
-    private float replicationProb = 0.1f;
+    private float replicationProb = 0.05f;
 
     public DroidShooterMob(int posX, int posY) {
         super(posX, posY, 121, 40);
