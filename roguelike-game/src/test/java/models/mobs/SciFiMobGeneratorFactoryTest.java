@@ -14,7 +14,7 @@ public class SciFiMobGeneratorFactoryTest {
 
     @Test
     public void testCreateStrongMob() {
-        var factory = new SciFiMobGeneratorFactory();
+        SciFiMobGeneratorFactory factory = new SciFiMobGeneratorFactory();
         int posX = randomInt();
         int posY = randomInt();
         Mob mob = factory.createStrongMob(posX, posY);
@@ -27,7 +27,7 @@ public class SciFiMobGeneratorFactoryTest {
 
     @Test
     public void testCreateWeakMob() {
-        var factory = new SciFiMobGeneratorFactory();
+        SciFiMobGeneratorFactory factory = new SciFiMobGeneratorFactory();
         int posX = randomInt();
         int posY = randomInt();
         Mob mob = factory.createWeakMob(posX, posY);

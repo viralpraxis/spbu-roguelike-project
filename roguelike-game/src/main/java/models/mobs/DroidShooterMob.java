@@ -16,8 +16,7 @@ public class DroidShooterMob extends WeakMob implements ClonableMob {
 
     @Override
     public DroidShooterMob clone() {
-        var copyMob = new DroidShooterMob(this.posX(), this.posY(), this.getHealth(), this.getPower());
-        return copyMob;
+        return new DroidShooterMob(this.posX(), this.posY(), this.getHealth(), this.getPower());
     }
 
     @Override

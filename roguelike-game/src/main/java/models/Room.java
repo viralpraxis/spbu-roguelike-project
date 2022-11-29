@@ -202,7 +202,7 @@ public class Room {
 
     private Mob tryReplicateMob(ClonableMob mob) {
         float p = random.nextFloat();
-        var clonableMob = (ClonableMob) mob;
+        ClonableMob clonableMob = (ClonableMob) mob;
         Mob clonedMob = null;
         if (p < clonableMob.getReplicationProb()) {
             clonedMob = (Mob) clonableMob.clone();

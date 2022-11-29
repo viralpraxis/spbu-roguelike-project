@@ -11,7 +11,7 @@ public class FantasyMobGeneratorFactoryTest {
 
     @Test
     public void testCreateStrongMob() {
-        var factory = new FantasyMobGeneratorFactory();
+        FantasyMobGeneratorFactory factory = new FantasyMobGeneratorFactory();
         int posX = randomInt();
         int posY = randomInt();
         Mob mob = factory.createStrongMob(posX, posY);
@@ -24,7 +24,7 @@ public class FantasyMobGeneratorFactoryTest {
 
     @Test
     public void testCreateWeakMob() {
-        var factory = new FantasyMobGeneratorFactory();
+        FantasyMobGeneratorFactory factory = new FantasyMobGeneratorFactory();
         int posX = randomInt();
         int posY = randomInt();
         Mob mob = factory.createWeakMob(posX, posY);

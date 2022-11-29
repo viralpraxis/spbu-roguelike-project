@@ -55,7 +55,7 @@ public class Configuration extends Repository {
 
     public Object _get(String key) {
         String[] tokens = key.split(KEY_SPLIT_REGEXP);
-        var currentData = new HashMap<String, Object>(data);
+        HashMap<String, Object> currentData = new HashMap<>(data);
 
         try {
             for (int i = 0; i < tokens.length - 1; i++) {
