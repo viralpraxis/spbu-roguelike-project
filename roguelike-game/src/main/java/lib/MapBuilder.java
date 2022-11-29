@@ -10,8 +10,7 @@ import lib.Interval;
 public class MapBuilder {
   private GenerationMethod generationMethod;
   private Size size;
-  private int minimumLevelsCount;
-  private int maximumLevelsCount;
+  private Interval<Integer> levelsCountInterval;
   private MobGeneratorFactory mobGeneratorFactory;
 
   public enum GenerationMethod {
@@ -27,7 +26,7 @@ public class MapBuilder {
     Level[] map;
 
     if (this.generationMethod == GenerationMethod.RANDOMIZED) {
-      map = new MapGenerator(this.size, this.minimumLevelsCount, this.maximumLevelsCount).generate();
+      map = new MapGenerator(this.size, this.levelsCountInterval, this.mobGeneratorFactory).generate();
     } else {
       map = new MapRepository().getMap();
     }
@@ -51,17 +50,12 @@ public class MapBuilder {
     return this;
   }
 
-  public MapBuilder setSize(int width, int height) {
-    this.size = new Size(width, height);
+  public MapBuilder setLevelsCountInterval(Interval<Integer> levelsCountInterval) {
+    if (levelsCountInterval.left() <= 0 || levelsCountInterval.right() <= 0) {
+      throw new IllegalArgumentException("Minimum and maximum should be positive");
+    }
 
-    return this;
-  }
-
-  public MapBuilder setLevelsCountInterval(Interval<Integer> interval) {
-    if (interval.left() <= 0 || interval.right() <= 0) throw new IllegalArgumentException("Minimum and maximum should be positive");
-
-    this.minimumLevelsCount = interval.left();
-    this.maximumLevelsCount = interval.right();
+    this.levelsCountInterval = levelsCountInterval;
 
     return this;
   }
@@ -75,7 +69,6 @@ public class MapBuilder {
   private void initializeDefaultValues() {
     this.generationMethod = GenerationMethod.RANDOMIZED;
     this.size = new Size(100, 48);
-    this.minimumLevelsCount = 3;
-    this.maximumLevelsCount = 6;
+    this.levelsCountInterval = new Interval<Integer>(3, 6);
   }
 }

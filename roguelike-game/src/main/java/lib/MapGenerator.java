@@ -3,24 +3,28 @@ package lib;
 import java.util.Random;
 
 import models.Level;
+import models.mobs.MobGeneratorFactory;
+import lib.Interval;
 
 public class MapGenerator {
     private LevelGenerator levelGenerator;
 
     private Size size;
-    private int minLevelsCount;
-    private int maxLevelsCount;
+    private Interval<Integer> levelsCountInterval;
+    private MobGeneratorFactory mobGeneratorFactory;
 
-    public MapGenerator(Size size, int minLevelsCount, int maxLevelsCount) {
-        this.levelGenerator = new LevelGenerator(size);
+    public MapGenerator(Size size, Interval<Integer> levelsCountInterval, MobGeneratorFactory mobGeneratorFactory) {
+        this.levelGenerator = new LevelGenerator(size, mobGeneratorFactory);
 
         this.size = size;
-        this.minLevelsCount = minLevelsCount;
-        this.maxLevelsCount = maxLevelsCount;
+        this.levelsCountInterval = levelsCountInterval;
+        this.mobGeneratorFactory = mobGeneratorFactory;
     }
 
     public Level[] generate() {
-        int levelsCount = new Random().nextInt(maxLevelsCount - minLevelsCount) + minLevelsCount;
+        int levelsCount = new Random().nextInt(
+          levelsCountInterval.right() - levelsCountInterval.left()
+        ) + levelsCountInterval.left();
         Level[] levels = new Level[levelsCount];
 
         for (int i = 0; i < levelsCount; i++) levels[i] = levelGenerator.generate();

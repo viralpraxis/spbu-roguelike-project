@@ -4,14 +4,20 @@ import java.util.Random;
 import java.util.List;
 import java.util.ArrayList;
 
-import core.*;
-import models.*;
+import models.GameObject;
+import models.Item;
+import models.Room;
+import models.Level;
+import models.Door;
 import models.mobs.Player;
+import models.mobs.Mob;
+import models.mobs.MobGeneratorFactory;
 
 public class LevelGenerator {
     private static Random randomizer = new Random();
 
     private Size size;
+    private MobGeneratorFactory mobGeneratorFactory;
 
     private int roomsCount;
     private Room[] rooms;
@@ -25,8 +31,9 @@ public class LevelGenerator {
     * @param height Map height.
     * @return Level Returns initialized levels.
     */
-    public LevelGenerator(Size size) {
+    public LevelGenerator(Size size, MobGeneratorFactory mobGeneratorFactory) {
         this.size = size;
+        this.mobGeneratorFactory = mobGeneratorFactory;
     }
 
     public Level generate() {
@@ -121,6 +128,19 @@ public class LevelGenerator {
         for (int i = 0; i < itemsCount; i++) {
             int[] itemPosition = randomPointInsideRoom(roomPositions[i], roomSizes[roomIndex]);
             gameObjects.add(new Item(itemPosition[0], itemPosition[1], "foo-bar"));
+        }
+
+        int mobsCount = randomizer.nextInt(2);
+        for (int i = 0; i < itemsCount; i++) {
+          int[] mobPosition = randomPointInsideRoom(roomPositions[i], roomSizes[roomIndex]);
+
+          Mob generatedMob;
+          if (randomizer.nextInt(3) == 0) {
+              generatedMob = this.mobGeneratorFactory.createStrongMob(mobPosition[0], mobPosition[1]);
+          } else {
+              generatedMob = this.mobGeneratorFactory.createWeakMob(mobPosition[0], mobPosition[1]);
+          }
+          gameObjects.add(generatedMob);
         }
 
         return gameObjects;

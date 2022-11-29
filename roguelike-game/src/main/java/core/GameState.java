@@ -13,9 +13,8 @@ public class GameState {
     private int curLevelId = 0;
 
     public GameState() {
-        MapBuilder mapBuilder = new MapBuilder();
-        mapBuilder
-          .setGenerationMethod(MapBuilder.GenerationMethod.PREDEFINED)
+        MapBuilder mapBuilder = new MapBuilder()
+          .setGenerationMethod(Configuration.getMapGenerationMethod())
           .setSize(Configuration.getMapSize())
           .setMobGeneratorFactory(Configuration.getMobGeneratorFactory())
           .setLevelsCountInterval(Configuration.getMapGenerationLevelsCountInterval());

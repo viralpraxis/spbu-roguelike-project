@@ -5,6 +5,7 @@ import java.util.HashMap;
 import models.mobs.MobGeneratorFactory;
 import models.mobs.SciFiMobGeneratorFactory;
 import models.mobs.FantasyMobGeneratorFactory;
+import lib.MapBuilder;
 import lib.Size;
 import lib.Interval;
 
@@ -35,6 +36,17 @@ public class Configuration extends Repository {
         (Integer) get("map.width"),
         (Integer) get("map.height")
       );
+    }
+
+    public static MapBuilder.GenerationMethod getMapGenerationMethod() {
+      switch ((String) fetch("map.generation.method", "randomized")) {
+        case "randomized":
+          return MapBuilder.GenerationMethod.RANDOMIZED;
+        case "predefined":
+          return MapBuilder.GenerationMethod.PREDEFINED;
+        default:
+          return MapBuilder.GenerationMethod.RANDOMIZED;
+      }
     }
 
     public static MobGeneratorFactory getMobGeneratorFactory() {
