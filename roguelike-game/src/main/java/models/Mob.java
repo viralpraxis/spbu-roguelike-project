@@ -9,8 +9,10 @@ public class Mob extends GameObject {
     private int experience;
     private int level;
     private int experienceForKill;
+    private boolean confused;
 
-    public Mob() {}
+    public Mob() {
+    }
 
     public Mob(int posX, int posY, int health, int power) {
         this.posX = posX;
@@ -23,6 +25,7 @@ public class Mob extends GameObject {
 
         this.visible = true;
 
+        confused = false;
         mobBehavior = new CowardMobBehavior();
         experience = 0;
         level = 0;
@@ -93,7 +96,7 @@ public class Mob extends GameObject {
 
     @Override
     public void handleStepFrom(Mob mob) {
-        mob.health -= power;
+        mob.alterHealth(-power);
     }
 
     /**
@@ -119,9 +122,34 @@ public class Mob extends GameObject {
      * located in.
      *
      * @param player Mob according to which next move decision for this mob should be made
-     * @param room Room in which this mob is located in
+     * @param room   Room in which this mob is located in
      */
     public void makeNextMove(Player player, Room room, CollisionsResolver collisionsResolver) {
         mobBehavior.makeNextMove(player, this, room, collisionsResolver);
+    }
+
+    /**
+     * Change the health of a mob.
+     *
+     * @param dHealth value by which the health should be changed
+     */
+    public void alterHealth(int dHealth) {
+        health += dHealth;
+    }
+
+    /**
+     * Sets the confused flag of the mob.
+     */
+    public void makeConfused() {
+        confused = true;
+    }
+
+    /**
+     * Checks whether the confused flag of this mob is set.
+     *
+     * @return true if confused flag is set, false - otherwise
+     */
+    public boolean isConfused() {
+        return confused;
     }
 }

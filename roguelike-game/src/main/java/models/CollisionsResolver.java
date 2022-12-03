@@ -24,6 +24,29 @@ public class CollisionsResolver {
             resolveCollision(player, gameObject, room);
         }
 
+        // Add confused mob
+        for (GameObject gameObject : room.getRoomContent()) {
+            if (gameObject instanceof Mob) {
+                Mob mob = (Mob) gameObject;
+                if (mob.isConfused()) {
+                    room.deleteGameObject(gameObject);
+                    room.addGameObject(new ConfusedMob(mob));
+                }
+            }
+        }
+
+
+        // Delete all mobs that are no longer confused
+        for (GameObject gameObject : room.getRoomContent()) {
+            if (gameObject instanceof ConfusedMob) {
+                ConfusedMob confusedMob = (ConfusedMob) gameObject;
+                if (confusedMob.getTimeLeft() == 0) {
+                    room.deleteGameObject(gameObject);
+                    room.addGameObject(confusedMob.getMob());
+                }
+            }
+        }
+
         if (!room.containsMobAtPos(desiredPosX, desiredPosY) && !steppedOnDoorDuringTurn &&
             room.posInsideRoom(desiredPosX, desiredPosY)) {
             player.moveAbsolute(desiredPosX, desiredPosY);
@@ -62,7 +85,6 @@ public class CollisionsResolver {
             if (mob.isDestroyed()) {
                 player.addExperience(mob.getExperienceForKill());
             }
-            // TODO: Add handling for confused mob
         }
 
         if (player.getHealth() <= 0) {
@@ -78,6 +100,7 @@ public class CollisionsResolver {
 
         if (gameObject.isDestroyed()) {
             room.deleteGameObject(gameObject);
+            collisions.remove(gameObject);
         }
     }
 }

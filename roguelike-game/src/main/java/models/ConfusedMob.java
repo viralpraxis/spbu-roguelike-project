@@ -14,6 +14,24 @@ public class ConfusedMob extends Mob {
         rand = new Random();
     }
 
+    /**
+     * Gets the time left for this mob to be confused.
+     *
+     * @return amount of the time left
+     */
+    public int getTimeLeft() {
+        return timeLeft;
+    }
+
+    /**
+     * Return an instance of mob that this instance of confused mob decorates.
+     *
+     * @return an instance of mob that is decorated
+     */
+    public Mob getMob() {
+        return mob;
+    }
+
     @Override
     public int getExperienceForKill() {
         return mob.getExperienceForKill();
@@ -27,6 +45,11 @@ public class ConfusedMob extends Mob {
     @Override
     public int getHealth() {
         return mob.getHealth();
+    }
+
+    @Override
+    public void alterHealth(int dHealth) {
+        mob.alterHealth(dHealth);
     }
 
     @Override
@@ -47,6 +70,11 @@ public class ConfusedMob extends Mob {
     @Override
     public boolean isDestroyed() {
         return mob.isDestroyed();
+    }
+
+    @Override
+    public void makeDestroyed() {
+        mob.makeDestroyed();
     }
 
     @Override
@@ -76,40 +104,35 @@ public class ConfusedMob extends Mob {
 
     @Override
     public void makeNextMove(Player player, Room room, CollisionsResolver collisionsResolver) {
-        if (timeLeft >= 0)
-        {
-            timeLeft -= 1;
-            makeRandomMove(player, room);
-        } else {
-            mob.makeNextMove(player, room, collisionsResolver);
-        }
+        timeLeft -= 1;
+        makeRandomMove(player, room, collisionsResolver);
     }
 
-    private void makeRandomMove(Mob player, Room room) {
+    private void makeRandomMove(Player player, Room room, CollisionsResolver collisionsResolver) {
         boolean moved = false;
         while (!moved) {
             int direction = rand.nextInt(4);
             if (direction == 0) {
-                moved = tryMakeMove(player, room, -1, 0);
+                moved = tryMakeMove(player, room, -1, 0, collisionsResolver);
             } else if (direction == 1) {
-                moved = tryMakeMove(player, room, +1, 0);
+                moved = tryMakeMove(player, room, +1, 0, collisionsResolver);
             } else if (direction == 2) {
-                moved = tryMakeMove(player, room, 0, -1);
+                moved = tryMakeMove(player, room, 0, -1, collisionsResolver);
             } else if (direction == 3) {
-                moved = tryMakeMove(player, room, 0, +1);
+                moved = tryMakeMove(player, room, 0, +1, collisionsResolver);
             }
         }
     }
 
-    private boolean tryMakeMove(Mob player, Room room, int dx, int dy) {
+    private boolean tryMakeMove(Player player, Room room, int dx, int dy, CollisionsResolver collisionsResolver) {
         if (player.posX() == mob.posX() + dx && player.posY() == mob.posY() + dy) {
-            player.handleStepFrom(mob);
+            collisionsResolver.addCollision(this);
+            // player.handleStepFrom(mob);
             return true;
         }
 
         if (!room.containsMobAtPos(mob.posX() + dx, mob.posY() + dy) &&
-            mob.posX() + dx < room.posX() + room.getSize() - 1 && mob.posX() + dx > room.posX() &&
-            mob.posY() + dy < room.posY() + room.getSize() - 1 && mob.posY() + dy > room.posY()) {
+            !room.nextStepOutsideRoom(mob, dx, dy)) {
             mob.move(dx, dy);
             return true;
         }

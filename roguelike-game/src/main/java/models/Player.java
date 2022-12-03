@@ -1,13 +1,14 @@
 package models;
 
+import java.util.Random;
+
 public class Player extends Mob {
     private final String name;
-    // private final Gender gender;
-    // private final Race race;
-
     private final static int DEFAULT_HEALTH = 100;
     private final static int DEFAULT_POWER = 100;
     private final static String DEFAULT_NAME = "John";
+    private double bashChance;
+    private Random random;
 
     public Player(int posX, int posY) {
         this(posX, posY, DEFAULT_HEALTH, DEFAULT_POWER, DEFAULT_NAME);
@@ -18,6 +19,8 @@ public class Player extends Mob {
 
         this.name = name;
         this.visible = true;
+        bashChance = 0.5;
+        random = new Random();
     }
 
     /**
@@ -29,6 +32,14 @@ public class Player extends Mob {
     public void moveAbsolute(int x, int y) {
         posX = x;
         posY = y;
+    }
+
+    @Override
+    public void handleStepFrom(Mob mob) {
+        super.handleStepFrom(mob);
+        if (random.nextDouble() < bashChance) {
+            mob.makeConfused();
+        }
     }
 
     public String getName() {
