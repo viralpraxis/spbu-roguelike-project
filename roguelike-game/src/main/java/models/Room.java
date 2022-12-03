@@ -48,17 +48,14 @@ public class Room {
 
         moveMobsInRoom(player, colsResolver);
 
-        int objId = 0;
-        int idx = 0;
+        // Find the object on which player will step after his move
         for (GameObject obj : objects) {
             if (obj.posX() == x && obj.posY() == y) {
                 objToStep = obj;
-                objId = idx;
                 if (objToStep instanceof Mob) {
                     break;
                 }
             }
-            idx += 1;
         }
 
         if (objToStep != null) {
