@@ -26,7 +26,7 @@ class DoorTest {
         door = new Door(randomInt(), randomInt(), randomInt(), randomInt(), randomInt());
         mob = new Mob(randomInt(), randomInt(), randomInt(), randomInt());
 
-        door.stepOn(mob);
+        door.wasSteppedBy(mob);
 
         assertEquals(mob.posX(), door.getLeadsToX());
         assertEquals(mob.posY(), door.getLeadsToY());

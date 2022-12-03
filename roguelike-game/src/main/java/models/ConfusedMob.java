@@ -20,8 +20,8 @@ public class ConfusedMob extends Mob {
     }
 
     @Override
-    public void stepOn(Mob mob) {
-        this.mob.stepOn(mob);
+    public void wasSteppedBy(Mob mob) {
+        this.mob.wasSteppedBy(mob);
     }
 
     @Override
@@ -103,7 +103,7 @@ public class ConfusedMob extends Mob {
 
     private boolean tryMakeMove(Mob player, Room room, int dx, int dy) {
         if (player.posX() == mob.posX() + dx && player.posY() == mob.posY() + dy) {
-            player.stepOn(mob);
+            player.wasSteppedBy(mob);
             return true;
         }
 
