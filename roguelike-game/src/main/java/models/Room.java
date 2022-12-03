@@ -69,7 +69,7 @@ public class Room {
         }
 
         if (objToStep != null) {
-            objToStep.wasSteppedBy(player);
+            objToStep.handleStepFrom(player);
 
             if (objToStep instanceof Mob) {
                 objects.add(new ConfusedMob((Mob) objToStep));

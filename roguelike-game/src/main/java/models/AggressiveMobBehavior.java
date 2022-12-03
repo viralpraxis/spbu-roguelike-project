@@ -7,7 +7,7 @@ public class AggressiveMobBehavior implements MobBehavior {
         int deltaY = mob.posY() - player.posY();
 
         if (Math.abs(deltaX) == 1 && deltaY == 0 || deltaX == 0 && Math.abs(deltaY) == 1) {
-            player.wasSteppedBy(mob);
+            player.handleStepFrom(mob);
             return;
         }
 
@@ -17,7 +17,7 @@ public class AggressiveMobBehavior implements MobBehavior {
             mob.move(-Integer.signum(deltaX), 0);
 
         if (mob.posX() == player.posX() && mob.posY() == player.posY()) {
-            player.wasSteppedBy(mob);
+            player.handleStepFrom(mob);
         }
     }
 }

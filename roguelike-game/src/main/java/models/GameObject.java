@@ -43,7 +43,7 @@ public abstract class GameObject {
      *
      * @param mob mob which stepped on this object
      */
-    public abstract void wasSteppedBy(Mob mob);
+    public abstract void handleStepFrom(Mob mob);
 
     /**
      * Checks whether someone can step on this object.

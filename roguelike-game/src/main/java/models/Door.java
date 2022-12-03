@@ -39,7 +39,7 @@ public class Door extends GameObject {
     }
 
     @Override
-    public void wasSteppedBy(Mob mob) {
+    public void handleStepFrom(Mob mob) {
         mob.posX = leadsToX;
         mob.posY = leadsToY;
     }

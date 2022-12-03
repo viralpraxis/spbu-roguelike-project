@@ -18,7 +18,7 @@ public class Item extends GameObject {
     }
 
     @Override
-    public void wasSteppedBy(Mob mob) {
+    public void handleStepFrom(Mob mob) {
         if (!(mob instanceof Player))
             return;
 

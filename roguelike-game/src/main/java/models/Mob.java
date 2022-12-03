@@ -92,7 +92,7 @@ public class Mob extends GameObject {
     }
 
     @Override
-    public void wasSteppedBy(Mob mob) {
+    public void handleStepFrom(Mob mob) {
         mob.health -= power;
         health -= mob.power;
         if (health <= 0) {
