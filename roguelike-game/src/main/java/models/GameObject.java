@@ -62,4 +62,11 @@ public abstract class GameObject {
     public boolean isDestroyed() {
         return destroyed;
     }
+
+    /**
+     * Sets the object as destroyed.
+     */
+    public void makeDestroyed() {
+        destroyed = true;
+    }
 }

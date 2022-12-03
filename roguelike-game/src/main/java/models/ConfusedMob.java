@@ -75,13 +75,13 @@ public class ConfusedMob extends Mob {
     }
 
     @Override
-    public void makeNextMove(Player player, Room room) {
+    public void makeNextMove(Player player, Room room, CollisionsResolver collisionsResolver) {
         if (timeLeft >= 0)
         {
             timeLeft -= 1;
             makeRandomMove(player, room);
         } else {
-            mob.makeNextMove(player, room);
+            mob.makeNextMove(player, room, collisionsResolver);
         }
     }
 

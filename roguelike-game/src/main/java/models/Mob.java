@@ -94,16 +94,6 @@ public class Mob extends GameObject {
     @Override
     public void handleStepFrom(Mob mob) {
         mob.health -= power;
-        health -= mob.power;
-        if (health <= 0) {
-            destroyed = true;
-            mob.addExperience(experienceForKill);
-        }
-
-        if (mob.health <= 0) {
-            mob.destroyed = true;
-            this.addExperience(mob.experienceForKill);
-        }
     }
 
     /**
@@ -131,7 +121,7 @@ public class Mob extends GameObject {
      * @param player Mob according to which next move decision for this mob should be made
      * @param room Room in which this mob is located in
      */
-    public void makeNextMove(Player player, Room room) {
-        mobBehavior.makeNextMove(player, this, room);
+    public void makeNextMove(Player player, Room room, CollisionsResolver collisionsResolver) {
+        mobBehavior.makeNextMove(player, this, room, collisionsResolver);
     }
 }

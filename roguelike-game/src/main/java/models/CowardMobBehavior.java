@@ -2,16 +2,14 @@ package models;
 
 public class CowardMobBehavior implements MobBehavior{
     @Override
-    public void makeNextMove(Player player, Mob mob, Room room) {
+    public void makeNextMove(Player player, Mob mob, Room room, CollisionsResolver collisionsResolver) {
         int deltaX = mob.posX() - player.posX();
         int deltaY = mob.posY() - player.posY();
 
-        if (Integer.signum(deltaY) + mob.posY() > room.posY() &&
-            Integer.signum(deltaY) + mob.posY() < room.posY() + room.getSize() - 1 &&
+        if (!room.nextStepOutsideRoom(mob, 0, Integer.signum(deltaY)) &&
             !room.containsMobAtPos(mob.posX(), mob.posY() + Integer.signum(deltaY)))
             mob.move(0, Integer.signum(deltaY));
-        else if (Integer.signum(deltaX) + mob.posX() > room.posX() &&
-                 Integer.signum(deltaX) + mob.posX() < room.posX() + room.getSize() - 1 &&
+        else if (!room.nextStepOutsideRoom(mob, Integer.signum(deltaX), 0) &&
                  !room.containsMobAtPos(mob.posX() + Integer.signum(deltaX), mob.posY()))
             mob.move(Integer.signum(deltaX), 0);
     }
