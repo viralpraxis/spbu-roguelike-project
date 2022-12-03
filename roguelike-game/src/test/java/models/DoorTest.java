@@ -22,17 +22,6 @@ class DoorTest {
     }
 
     @Test
-    public void testStepOn() {
-        door = new Door(randomInt(), randomInt(), randomInt(), randomInt(), randomInt());
-        mob = new Mob(randomInt(), randomInt(), randomInt(), randomInt());
-
-        door.handleStepFrom(mob);
-
-        assertEquals(mob.posX(), door.getLeadsToX());
-        assertEquals(mob.posY(), door.getLeadsToY());
-    }
-
-    @Test
     public void testGetLeadsToX() {
         int doorLeadsToX = randomInt();
         door = new Door(randomInt(), randomInt(), doorLeadsToX, randomInt(), randomInt());
