@@ -75,7 +75,7 @@ public class ConfusedMob extends Mob {
     }
 
     @Override
-    public void makeNextMove(Mob player, Room room) {
+    public void makeNextMove(Player player, Room room) {
         if (timeLeft >= 0)
         {
             timeLeft -= 1;

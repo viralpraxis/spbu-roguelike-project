@@ -35,18 +35,18 @@ public class Room {
     /**
      * Handles next move of a mob.
      *
-     * @param mob Mob whose move we should handle
+     * @param player Main player of the game
      * @param dx  relative change of position in x direction
      * @param dy  relative change of position in y direction
      * @return -1 if after the turn mob stays in the same room; id of the next room otherwise
      */
-    public int makeMove(Mob mob, int dx, int dy) {
+    public int makeMove(Player player, int dx, int dy) {
         GameObject objToStep = null;
 
-        int x = mob.posX() + dx;
-        int y = mob.posY() + dy;
+        int x = player.posX() + dx;
+        int y = player.posY() + dy;
 
-        moveMobsInRoom(mob);
+        moveMobsInRoom(player);
 
         int objId = 0;
         int idx = 0;
@@ -69,7 +69,7 @@ public class Room {
         }
 
         if (objToStep != null) {
-            objToStep.stepOn(mob);
+            objToStep.stepOn(player);
 
             if (objToStep instanceof Mob) {
                 objects.add(new ConfusedMob((Mob) objToStep));
@@ -82,8 +82,8 @@ public class Room {
             objToStep = null;
         }
 
-        if ((!nextStepOutsideRoom(mob, dx, dy) && objToStep == null) || (objToStep != null && objToStep.isSteppable()))
-            mob.move(dx, dy);
+        if ((!nextStepOutsideRoom(player, dx, dy) && objToStep == null) || (objToStep != null && objToStep.isSteppable()))
+            player.move(dx, dy);
 
         return retValue;
     }
@@ -168,12 +168,12 @@ public class Room {
         return false;
     }
 
-    private void moveMobsInRoom(Mob mob) {
+    private void moveMobsInRoom(Player player) {
         List<GameObject> deleteList = new LinkedList<>();
 
         for (GameObject object: objects) {
             if (object instanceof Mob) {
-                ((Mob) object).makeNextMove(mob, this);
+                ((Mob) object).makeNextMove(player, this);
                 if (((Mob) object).isDestroyed())
                     deleteList.add(object);
             }

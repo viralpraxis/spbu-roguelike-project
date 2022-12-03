@@ -131,7 +131,7 @@ public class Mob extends GameObject {
      * @param player Mob according to which next move decision for this mob should be made
      * @param room Room in which this mob is located in
      */
-    public void makeNextMove(Mob player, Room room) {
+    public void makeNextMove(Player player, Room room) {
         mobBehavior.makeNextMove(player, this, room);
     }
 }

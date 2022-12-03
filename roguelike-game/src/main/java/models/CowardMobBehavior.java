@@ -2,7 +2,7 @@ package models;
 
 public class CowardMobBehavior implements MobBehavior{
     @Override
-    public void makeNextMove(Mob player, Mob mob, Room room) {
+    public void makeNextMove(Player player, Mob mob, Room room) {
         int deltaX = mob.posX() - player.posX();
         int deltaY = mob.posY() - player.posY();
 

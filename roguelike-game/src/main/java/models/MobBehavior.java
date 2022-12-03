@@ -7,5 +7,5 @@ interface MobBehavior {
      * @param mob Mob that should be moved
      * @param room Room in which mob is located
      */
-    public void makeNextMove(Mob player, Mob mob, Room room);
+    public void makeNextMove(Player player, Mob mob, Room room);
 }
