@@ -18,11 +18,15 @@ public class CollisionsResolver {
 
     public void resolveCollisionsAndMovePlayer(Player player, Room room) {
         boolean steppedOnDoorDuringTurn = false;
+        System.out.println(collisions.toString());
         for (GameObject gameObject: collisions) {
             if (gameObject instanceof Door)
                 steppedOnDoorDuringTurn = true;
-            resolveCollision(player, gameObject, room);
+            if (!gameObject.isDestroyed())
+                resolveCollision(player, gameObject, room);
         }
+
+        collisions.removeIf(gobj -> gobj.isDestroyed());
 
         // Add confused mob
         for (GameObject gameObject : room.getRoomContent()) {
@@ -100,7 +104,6 @@ public class CollisionsResolver {
 
         if (gameObject.isDestroyed()) {
             room.deleteGameObject(gameObject);
-            collisions.remove(gameObject);
         }
     }
 }
