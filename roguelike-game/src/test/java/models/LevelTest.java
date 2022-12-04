@@ -33,7 +33,7 @@ class LevelTest {
                 level.makeNextMove(player, dx, dy);
             }
         } catch (Exception e) {
-            assertFalse(false);
+            assertTrue(false);
         }
 
         assertTrue(level.isFinished());
