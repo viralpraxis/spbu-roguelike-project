@@ -7,10 +7,12 @@ public class CowardMobBehavior implements MobBehavior{
         int deltaY = mob.posY() - player.posY();
 
         if (!room.nextStepOutsideRoom(mob, 0, Integer.signum(deltaY)) &&
-            !room.containsMobAtPos(mob.posX(), mob.posY() + Integer.signum(deltaY)))
+            !room.containsMobAtPos(mob.posX(), mob.posY() + Integer.signum(deltaY))) {
             mob.move(0, Integer.signum(deltaY));
+        }
         else if (!room.nextStepOutsideRoom(mob, Integer.signum(deltaX), 0) &&
-                 !room.containsMobAtPos(mob.posX() + Integer.signum(deltaX), mob.posY()))
+                 !room.containsMobAtPos(mob.posX() + Integer.signum(deltaX), mob.posY())) {
             mob.move(Integer.signum(deltaX), 0);
+        }
     }
 }

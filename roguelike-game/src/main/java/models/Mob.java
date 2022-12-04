@@ -134,7 +134,7 @@ public class Mob extends GameObject {
      * @param dHealth value by which the health should be changed
      */
     public void alterHealth(int dHealth) {
-        health += dHealth;
+        health = Math.max(0, health + dHealth);
     }
 
     /**
