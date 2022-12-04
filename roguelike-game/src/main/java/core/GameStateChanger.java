@@ -61,7 +61,7 @@ public class GameStateChanger {
                 Logger.log("Exiting..");
                 System.exit(0);
             default:
-                Logger.log("WARN", "Unknow event: " + event.getType().toString());
+                Logger.log("WARN", "Unknown event: " + event.getType().toString());
         }
     }
 }
