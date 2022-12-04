@@ -144,6 +144,34 @@ class LevelTest {
     }
 
     @Test
+    public void testFightWithConfusedMob() {
+      List<GameObject> gameObjects = new ArrayList<>();
+      Mob mob = new Mob(50, 50, 20, 20);
+      mob.setMobBehavior("coward");
+      gameObjects.add(mob);
+
+      Room room = new Room(true, 10, 10, gameObjects, 100);
+      Player player = new Player(11, 11, 100, 10, "Edsger W. Dijkstra", 50.0);
+      Level level = new Level(new Room[]{room}, player);
+
+      int dx, dy;
+      for (int i = 0; i < 1000; i++) {
+          dx = Integer.signum(mob.posX() - player.posX());
+          dy = Integer.signum(mob.posY() - player.posY());
+          level.makeNextMove(player, dx, dy);
+      }
+
+      assertEquals(50, player.posX());
+      assertEquals(108, player.posY());
+
+      assertEquals(50, mob.posX());
+      assertEquals(108, mob.posY());
+
+      assertTrue(player.getHealth() > 0);
+      assertEquals(0, mob.getHealth());
+    }
+
+    @Test
     public void testIsFinished_whenFinished() {
         Player player = new Player(randomInt(), randomInt());
         level = new Level(new Room[]{buildRoomWithoutMobs(), buildRoomWithoutMobs()}, player);

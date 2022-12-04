@@ -2,6 +2,8 @@ package models;
 
 import java.util.Random;
 
+import repositories.Configuration;
+
 public class ConfusedMob extends Mob {
     private Mob mob;
     private int timeLeft;
@@ -11,7 +13,7 @@ public class ConfusedMob extends Mob {
         this.mob = mob;
 
         timeLeft = 5;
-        rand = new Random();
+        rand = new Random(Configuration.getRandomSeed());
     }
 
     /**

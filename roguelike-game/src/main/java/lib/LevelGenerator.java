@@ -7,9 +7,10 @@ import java.util.Arrays;
 
 import core.*;
 import models.*;
+import repositories.Configuration;
 
 public class LevelGenerator {
-    private static Random randomizer = new Random();
+    private static Random randomizer = new Random(Configuration.getRandomSeed());
 
     private int width;
     private int height;

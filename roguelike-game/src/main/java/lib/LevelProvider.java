@@ -17,7 +17,7 @@ class LevelProvider {
     private boolean isInitialized = false;
     private Iterator<Level> predefinedLevelsIterator;
     private LevelGenerator levelGenerator;
-    private Random random = new Random();
+    private Random random = new Random(Configuration.getRandomSeed());
 
     private double predefinedToGeneratedRatio;
 

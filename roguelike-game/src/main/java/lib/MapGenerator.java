@@ -11,6 +11,8 @@ public class MapGenerator {
     private int minLevelsAmount;
     private int maxLevelsAmount;
 
+    private Random random;
+
     public static Level[] generate() {
         if (instance == null) instance = new MapGenerator();
 
@@ -22,7 +24,7 @@ public class MapGenerator {
     }
 
     private Level[] _generate() {
-        var levelsAmount = new Random().nextInt(maxLevelsAmount - minLevelsAmount) + minLevelsAmount;
+        var levelsAmount = this.random.nextInt(maxLevelsAmount - minLevelsAmount) + minLevelsAmount;
         var levels = new Level[levelsAmount];
 
         for (int i = 0; i < levelsAmount; i++) levels[i] = LevelProvider.get();
@@ -33,5 +35,6 @@ public class MapGenerator {
     private void initialize() {
         this.minLevelsAmount = (Integer) Configuration.get("map_generation.minumum_levels_count");
         this.maxLevelsAmount = (Integer) Configuration.get("map_generation.maximum_levels_count");
+        this.random = new Random(Configuration.getRandomSeed());
     }
 }

@@ -2,6 +2,8 @@ package models;
 
 import java.util.Random;
 
+import repositories.Configuration;
+
 public class Player extends Mob {
     private final String name;
 
@@ -19,7 +21,7 @@ public class Player extends Mob {
         this.visible = true;
         this.bashChance = bashChance;
 
-        random = new Random();
+        random = new Random(Configuration.getRandomSeed());
     }
 
     public Player(int posX, int posY, int health, int power, String name) {

@@ -6,3 +6,5 @@ level_generation:
 map_generation:
   minumum_levels_count: 5
   maximum_levels_count: 15
+random:
+  seed: 42
