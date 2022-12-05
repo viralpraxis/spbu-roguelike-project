@@ -18,7 +18,6 @@ public class CollisionsResolver {
 
     public void resolveCollisionsAndMovePlayer(Player player, Room room) {
         boolean steppedOnDoorDuringTurn = false;
-        System.out.println(collisions.toString());
         for (GameObject gameObject: collisions) {
             if (gameObject instanceof Door)
                 steppedOnDoorDuringTurn = true;
