@@ -5,7 +5,6 @@ import java.util.Random;
 import models.Level;
 import models.mobs.MobGeneratorFactory;
 import repositories.Configuration;
-import lib.Interval;
 
 
 public class MapGenerator {

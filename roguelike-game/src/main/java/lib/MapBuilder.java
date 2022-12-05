@@ -5,7 +5,6 @@ import java.util.Objects;
 import models.Level;
 import models.mobs.MobGeneratorFactory;
 import repositories.MapRepository;
-import lib.Interval;
 
 public class MapBuilder {
   private GenerationMethod generationMethod;

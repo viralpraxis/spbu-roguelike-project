@@ -9,7 +9,6 @@ import models.Door;
 import models.mobs.Mob;
 import models.mobs.Player;
 import models.mobs.ConfusedMob;
-import repositories.Configuration;
 import lib.Size;
 
 import com.googlecode.lanterna.*;

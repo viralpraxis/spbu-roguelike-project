@@ -5,6 +5,7 @@ import eventproducers.EventProducer;
 
 public class GameInitializer {
     private static GameController controller;
+    private static GameState gameState;
 
     public static void main(String[] args) {
         initialize();
@@ -15,7 +16,15 @@ public class GameInitializer {
     * @return GameController Returns singleton controller instance.
     */
     public static GameController getGameController() {
+        if (controller == null) controller = new GameController();
+
         return controller;
+    }
+
+    public static GameState getGameState() {
+        if (gameState == null) gameState = new GameState();
+
+        return gameState;
     }
 
     private static void initialize() {
@@ -23,7 +32,6 @@ public class GameInitializer {
           @Override
           public void run() {
             EventProducer.initializeAll();
-            controller = new GameController();
 
             while (true) {}
           }
