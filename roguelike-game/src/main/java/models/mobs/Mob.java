@@ -10,6 +10,7 @@ public class Mob extends GameObject {
     protected int health;
     protected int power;
     private MobBehavior mobBehavior;
+    private MobBehavior defaultBehavior = null;
     private int experience;
     private int level;
     private int experienceForKill;
@@ -56,6 +57,8 @@ public class Mob extends GameObject {
             default:
                 throw new IllegalArgumentException();
         }
+        if (defaultBehavior == null)
+            defaultBehavior = mobBehavior;
     }
 
     /**
@@ -139,6 +142,10 @@ public class Mob extends GameObject {
      */
     public void alterHealth(int dHealth) {
         health = Math.max(0, health + dHealth);
+        if (health > 100 && mobBehavior instanceof CowardMobBehavior)
+            mobBehavior = defaultBehavior;
+        else if (health < 100)
+            mobBehavior = new CowardMobBehavior();
     }
 
     /**
