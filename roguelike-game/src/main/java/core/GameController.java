@@ -1,13 +1,11 @@
 package core;
 
-import lib.Event;
-import ui.Renderer;
-import repositories.Configuration;
-
-import models.mobs.Player;
 import lib.Logger;
 import lib.Event;
 import lib.Movement;
+import repositories.Configuration;
+import ui.Renderer;
+
 
 import commands.MovePlayerCommand;
 import commands.UpdateInventorySelectedStatusCommand;
@@ -16,14 +14,12 @@ import commands.ChangeSelectedItemEquipStatusCommand;
 import commands.TryMoveToNextLevelCommand;
 
 public class GameController {
-    private Renderer render;
-    private GameState gameState;
+
+    private Renderer renderer;
 
     public GameController() {
-        render = new Renderer(Configuration.getMapSize());
-        gameState = GameInitializer.getGameState();
-
-        render.render(gameState);
+        renderer = new Renderer(Configuration.getMapSize());
+        renderer.render();
     }
 
     /**
@@ -33,7 +29,7 @@ public class GameController {
     */
     public boolean handleEvent(Event event) {
         processEvent(event);
-        render.render(gameState);
+        renderer.render();
 
         return true;
     }
@@ -44,7 +40,6 @@ public class GameController {
     */
     public void processEvent(Event event) {
       Logger.log("Event: " + event.getType().toString());
-      Player player = gameState.getPlayer();
 
       switch (event.getType()) {
           case PLAYER_MOVE_UP:
@@ -80,7 +75,7 @@ public class GameController {
 
               break;
           case PLAYER_EQUIP_ITEM:
-              new ChangeSelectedItemEquipStatusCommand(player).execute();;
+              new ChangeSelectedItemEquipStatusCommand().execute();;
 
               break;
           case PLAYER_MOVE_NEXT_LEVEL:

@@ -1,5 +1,6 @@
 package ui;
 
+import core.GameInitializer;
 import core.GameState;
 import models.Room;
 import models.GameObject;
@@ -212,9 +213,9 @@ public class Renderer {
         else throw new IllegalArgumentException();
     }
 
-    public void render(GameState gameState) {
+    public void render() {
         try {
-            tryRender(gameState);
+            tryRender(GameInitializer.getGameState());
         } catch (IOException e) {
             e.printStackTrace();
         }
