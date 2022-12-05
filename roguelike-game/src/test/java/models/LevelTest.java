@@ -4,6 +4,7 @@ import java.util.Random;
 import java.util.List;
 import java.util.ArrayList;
 
+import models.mobs.CowardMobBehavior;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -55,8 +56,15 @@ class LevelTest {
             level.makeNextMove(player, 0, 0);
         }
 
-        assertEquals(60, player.getHealth());
-        assertEquals(0, mob.getHealth());
+        assertEquals(80, player.getHealth());
+        assertEquals(10, mob.getHealth());
+
+        // Check that mob has coward behavior
+        try {
+            mob.getClass().getDeclaredField("mobBehavior").setAccessible(true);
+            Object behavior = mob.getClass().getDeclaredField("mobBehavior").get(mob);
+            assertInstanceOf(CowardMobBehavior.class, behavior);
+        } catch (NoSuchFieldException | IllegalAccessException e) { }
     }
 
     @Test
@@ -78,8 +86,17 @@ class LevelTest {
             dy = Integer.signum(mob.posY() - player.posY());
             level.makeNextMove(player, dx, dy);
 
-            assertEquals(initialMobX, mob.posX());
-            assertEquals(initialMobY, mob.posY());
+            if (mob.getHealth() == 10) {
+                try {
+                    mob.getClass().getDeclaredField("mobBehavior").setAccessible(true);
+                    Object behavior = mob.getClass().getDeclaredField("mobBehavior").get(mob);
+                    assertInstanceOf(CowardMobBehavior.class, behavior);
+                } catch (NoSuchFieldException | IllegalAccessException e) { }
+            }
+            if (mob.getHealth() == 20) {
+                assertEquals(initialMobX, mob.posX());
+                assertEquals(initialMobY, mob.posY());
+            }
         }
 
         assertEquals(60, player.getHealth());
