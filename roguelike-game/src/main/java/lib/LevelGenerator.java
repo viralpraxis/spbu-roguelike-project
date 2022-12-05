@@ -12,9 +12,11 @@ import models.Door;
 import models.mobs.Player;
 import models.mobs.Mob;
 import models.mobs.MobGeneratorFactory;
+import core.*;
+import repositories.Configuration;
 
 public class LevelGenerator {
-    private static Random randomizer = new Random();
+    private static Random randomizer = new Random(Configuration.getRandomSeed());
 
     private Size size;
     private MobGeneratorFactory mobGeneratorFactory;

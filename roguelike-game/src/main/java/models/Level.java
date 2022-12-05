@@ -27,7 +27,6 @@ public class Level {
         for (Room room : rooms) {
             if (room.containsMobs()) return false;
         }
-
         return true;
     }
 
@@ -41,10 +40,15 @@ public class Level {
     public void makeNextMove(Player player, int dx, int dy) {
         Room curRoom = rooms[currentRoomId];
 
-        int retValue = curRoom.makeMove(player, dx, dy);
-        if (retValue != -1) {
-            rooms[retValue].makeVisible();
-            currentRoomId = retValue;
+        CollisionsResolver colsResolver = new CollisionsResolver(currentRoomId);
+
+        curRoom.makeMove(player, dx, dy, colsResolver);
+
+        colsResolver.resolveCollisionsAndMovePlayer(player, curRoom);
+
+        if (currentRoomId != colsResolver.getCurrentRoom()) {
+            currentRoomId = colsResolver.getCurrentRoom();
+            rooms[currentRoomId].makeVisible();
         }
     }
 

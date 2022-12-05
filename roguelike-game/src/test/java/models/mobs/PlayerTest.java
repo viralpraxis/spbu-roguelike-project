@@ -29,7 +29,7 @@ class PlayerTest {
         player = buildPlayer();
 
         assertEquals(
-            String.format("Player((%d, %d), H%s, S%s, %s)", player.posX(), player.posY(), player.getHealth(), player.getPower(), player.getName()),
+            String.format("Player((%d, %d), H%s, S%s, %s, %f)", player.posX(), player.posY(), player.getHealth(), player.getPower(), player.getName(), player.getBashChance()),
             player.toString()
         );
     }

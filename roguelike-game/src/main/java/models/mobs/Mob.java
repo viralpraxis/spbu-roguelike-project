@@ -1,6 +1,7 @@
 package models.mobs;
 
 import models.GameObject;
+import models.CollisionsResolver;
 import models.Room;
 
 public class Mob extends GameObject {
@@ -12,8 +13,10 @@ public class Mob extends GameObject {
     private int experience;
     private int level;
     private int experienceForKill;
+    private boolean confused;
 
-    public Mob() {}
+    public Mob() {
+    }
 
     public Mob(int posX, int posY, int health, int power) {
         this.posX = posX;
@@ -24,10 +27,9 @@ public class Mob extends GameObject {
         this.health = baseHealth;
         this.power = basePower;
 
-        this.representation = new char[1][1];
-        this.representation[0][0] = 'm';
         this.visible = true;
 
+        confused = false;
         mobBehavior = new CowardMobBehavior();
         experience = 0;
         level = 0;
@@ -97,18 +99,8 @@ public class Mob extends GameObject {
     }
 
     @Override
-    public void stepOn(Mob mob) {
-        mob.health -= power;
-        health -= mob.power;
-        if (health <= 0) {
-            destroyed = true;
-            mob.addExperience(experienceForKill);
-        }
-
-        if (mob.health <= 0) {
-            mob.destroyed = true;
-            this.addExperience(mob.experienceForKill);
-        }
+    public void handleStepFrom(Mob mob) {
+        mob.alterHealth(-power);
     }
 
     /**
@@ -134,9 +126,34 @@ public class Mob extends GameObject {
      * located in.
      *
      * @param player Mob according to which next move decision for this mob should be made
-     * @param room Room in which this mob is located in
+     * @param room   Room in which this mob is located in
      */
-    public void makeNextMove(Mob player, Room room) {
-        mobBehavior.makeNextMove(player, this, room);
+    public void makeNextMove(Player player, Room room, CollisionsResolver collisionsResolver) {
+        mobBehavior.makeNextMove(player, this, room, collisionsResolver);
+    }
+
+    /**
+     * Change the health of a mob.
+     *
+     * @param dHealth value by which the health should be changed
+     */
+    public void alterHealth(int dHealth) {
+        health = Math.max(0, health + dHealth);
+    }
+
+    /**
+     * Sets the confused flag of the mob.
+     */
+    public void makeConfused() {
+        confused = true;
+    }
+
+    /**
+     * Checks whether the confused flag of this mob is set.
+     *
+     * @return true if confused flag is set, false - otherwise
+     */
+    public boolean isConfused() {
+        return confused;
     }
 }

@@ -14,8 +14,6 @@ public class Item extends GameObject {
         this.posX = posX;
         this.posY = posY;
         this.name = name;
-        representation = new char[1][1];
-        representation[0][0] = 'i';
         visible = true;
         equipped = false;
         steppable = true;
@@ -23,7 +21,7 @@ public class Item extends GameObject {
     }
 
     @Override
-    public void stepOn(Mob mob) {
+    public void handleStepFrom(Mob mob) {
         if (!(mob instanceof Player))
             return;
 

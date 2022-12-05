@@ -5,7 +5,11 @@ import models.Room;
 import models.GameObject;
 import models.Inventory;
 import models.Item;
+import models.Door;
+import models.mobs.Mob;
 import models.mobs.Player;
+import models.mobs.ConfusedMob;
+import repositories.Configuration;
 import lib.Size;
 
 import com.googlecode.lanterna.*;
@@ -113,10 +117,15 @@ public class Renderer {
     private void drawGameObject(GameObject object) {
         if (!object.isVisible())
             return;
-        for (int i = 0; i < object.getRepresentation().length; ++i) {
-            for (int j = 0; j < object.getRepresentation()[0].length; ++j)
-                screen.setCharacter(object.posX() + i + mapPosX + 1, object.posY() + i + mapPosY + 1,
-                                    new TextCharacter(object.getRepresentation()[i][j]));
+
+        char[][] gameObjectRepresentation = getRepresentation(object);
+        for (int i = 0; i < gameObjectRepresentation.length; ++i) {
+            for (int j = 0; j < gameObjectRepresentation.length; ++j) {
+                screen.setCharacter(
+                    object.posX() + i + mapPosX + 1, object.posY() + i + mapPosY + 1,
+                    new TextCharacter(gameObjectRepresentation[i][j])
+                );
+            }
         }
     }
 
@@ -193,6 +202,15 @@ public class Renderer {
         screen.clear();
         drawMapFrame();
         drawUtilitiesFrame();
+    }
+
+    private char[][] getRepresentation(GameObject gameObject) {
+        if (gameObject instanceof Door) return new char[][]{{'+'}};
+        else if (gameObject instanceof Item) return new char[][]{{'i'}};
+        else if (gameObject instanceof Player) return new char[][]{{'@'}};
+        else if (gameObject instanceof ConfusedMob) return new char[][]{{'c'}};
+        else if (gameObject instanceof Mob) return new char[][]{{'m'}};
+        else throw new IllegalArgumentException();
     }
 
     public void render(GameState gameState) {

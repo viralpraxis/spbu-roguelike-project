@@ -25,7 +25,7 @@ class ItemTest {
         Inventory inventory = Inventory.getInventory();
         int initialInventoryItemsSize = inventory.getItems().size();
 
-        item.stepOn(player);
+        item.handleStepFrom(player);
 
         assertEquals(
             initialInventoryItemsSize + 1,
@@ -42,7 +42,7 @@ class ItemTest {
         int initialInventoryItemsSize = inventory.getItems().size();
         boolean initialVisibility = item.isVisible();
 
-        item.stepOn(mob);
+        item.handleStepFrom(mob);
 
         assertEquals(
             initialInventoryItemsSize,

@@ -79,4 +79,8 @@ public class Configuration extends Repository {
             return null;
         }
     }
+
+    public static long getRandomSeed() {
+        return new Long((Integer) get("random.seed"));
+    }
 }

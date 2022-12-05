@@ -40,57 +40,34 @@ public class Room {
     /**
      * Handles next move of a mob.
      *
-     * @param mob Mob whose move we should handle
+     * @param player Main player of the game
      * @param dx  relative change of position in x direction
      * @param dy  relative change of position in y direction
      * @return -1 if after the turn mob stays in the same room; id of the next room otherwise
      */
-    public int makeMove(Mob mob, int dx, int dy) {
+    public void makeMove(Player player, int dx, int dy, CollisionsResolver colsResolver) {
         GameObject objToStep = null;
 
-        int x = mob.posX() + dx;
-        int y = mob.posY() + dy;
+        int x = player.posX() + dx;
+        int y = player.posY() + dy;
 
-        moveMobsInRoom(mob);
+        moveMobsInRoom(player, colsResolver);
 
-        int objId = 0;
-        int idx = 0;
+        // Find the object on which player will step after his move
         for (GameObject obj : objects) {
             if (obj.posX() == x && obj.posY() == y) {
                 objToStep = obj;
-                objId = idx;
                 if (objToStep instanceof Mob) {
                     break;
                 }
             }
-            idx += 1;
-        }
-
-        int retValue = -1;
-
-        if (objToStep != null && objToStep instanceof Door) {
-            // We stepped on a door
-            retValue = ((Door) objToStep).leadsTo();
         }
 
         if (objToStep != null) {
-            objToStep.stepOn(mob);
-
-            if (objToStep instanceof Mob) {
-                objects.add(new ConfusedMob((Mob) objToStep));
-                objects.remove(objId);
-            }
+            colsResolver.addCollision(objToStep);
         }
 
-        if (objToStep != null && objToStep.isDestroyed()) {
-            objects.remove(objId);
-            objToStep = null;
-        }
-
-        if ((!nextStepOutsideRoom(mob, dx, dy) && objToStep == null) || (objToStep != null && objToStep.isSteppable()))
-            mob.move(dx, dy);
-
-        return retValue;
+        colsResolver.setDesirablePlayerPos(x, y);
     }
 
     /**
@@ -161,7 +138,33 @@ public class Room {
         return false;
     }
 
-    private boolean nextStepOutsideRoom(Mob mob, int dx, int dy) {
+    /**
+     * Deletes an instance of GameObject from the room.
+     *
+     * @param gameObject instance of GameObject that should be deleted
+     */
+    public void deleteGameObject(GameObject gameObject) {
+        objects.remove(gameObject);
+    }
+
+    /**
+     * Adds an instance of GameObject to the room.
+     *
+     * @param gameObject an instance of GameObject to be added
+     */
+    public void addGameObject(GameObject gameObject) {
+        objects.add(gameObject);
+    }
+
+    /**
+     * Checks whether next step of a mob will move him outside the room.
+     *
+     * @param mob mob whose new position will be checked
+     * @param dx relative change in position in x-axis
+     * @param dy relative change in position in y-axis
+     * @return true if new position is outside the room, false - otherwise
+     */
+    public boolean nextStepOutsideRoom(Mob mob, int dx, int dy) {
         if (mob.posX() + dx + 1 >= posX + size)
             return true;
         if (mob.posX() + dx <= posX)
@@ -173,31 +176,31 @@ public class Room {
         return false;
     }
 
-    private void moveMobsInRoom(Mob mob) {
-        List<GameObject> deleteList = new LinkedList<>();
+    /**
+     * Checks that the given position is inside the room.
+     *
+     * @param x x coordinate of position
+     * @param y y coordinate of position
+     * @return true if given position is inside the room, false - otherwise
+     */
+    public boolean posInsideRoom(int x, int y) {
+        if (x + 1 >= posX + size)
+            return false;
+        if (x <= posX)
+            return false;
+        if (y + 1 >= posY + size)
+            return false;
+        if (y <= posY)
+            return false;
+        return true;
+    }
 
+    private void moveMobsInRoom(Player player, CollisionsResolver collisionsResolver) {
         for (GameObject object: objects) {
             if (object instanceof Mob) {
-                ((Mob) object).makeNextMove(mob, this);
-                if (((Mob) object).isDestroyed())
-                    deleteList.add(object);
+                ((Mob) object).makeNextMove(player, this, collisionsResolver);
             }
         }
-
-        for (GameObject destroyedObj: deleteList) {
-            objects.remove(destroyedObj);
-        }
-
-        // TODO: Move this logic into CollisionResolver?
-        List<GameObject> addList = new LinkedList<>();
-        for (GameObject object: objects) {
-            if (object instanceof ClonableMob) {
-                Mob replicatedMob = tryReplicateMob((ClonableMob) object);
-                if (replicatedMob != null)
-                    addList.add(replicatedMob);
-            }
-        }
-        objects.addAll(addList);
     }
 
     private Mob tryReplicateMob(ClonableMob mob) {
