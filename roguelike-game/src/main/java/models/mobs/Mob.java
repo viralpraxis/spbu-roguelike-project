@@ -142,7 +142,7 @@ public class Mob extends GameObject {
      */
     public void alterHealth(int dHealth) {
         health = Math.max(0, health + dHealth);
-        if (health > 100 && mobBehavior instanceof CowardMobBehavior)
+        if (health >= 100 && mobBehavior instanceof CowardMobBehavior)
             mobBehavior = defaultBehavior;
         else if (health < 100)
             mobBehavior = new CowardMobBehavior();
