@@ -7,7 +7,7 @@ interface MobBehavior {
      * @param player             main Player of the game
      * @param mob                Mob that should be moved
      * @param room               Room in which mob is located
-     * @param collisionsResolver
+     * @param collisionsResolver CollisionResolver instance that is used to resolve collisions
      */
     public void makeNextMove(Player player, Mob mob, Room room, CollisionsResolver collisionsResolver);
 }
