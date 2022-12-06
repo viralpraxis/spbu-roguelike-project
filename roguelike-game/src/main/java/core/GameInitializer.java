@@ -1,7 +1,7 @@
 package core;
 
 import eventproducers.EventProducer;
-
+import controllers.GameController;
 
 public class GameInitializer {
     private static GameController gameController;

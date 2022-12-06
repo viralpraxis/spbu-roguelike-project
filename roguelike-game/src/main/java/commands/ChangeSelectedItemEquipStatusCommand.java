@@ -2,7 +2,6 @@ package commands;
 
 import core.GameInitializer;
 import models.Inventory;
-import models.mobs.Player;
 
 public class ChangeSelectedItemEquipStatusCommand implements ICommand {
     @Override

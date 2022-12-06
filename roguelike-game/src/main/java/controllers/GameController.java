@@ -1,4 +1,4 @@
-package core;
+package controllers;
 
 import lib.Logger;
 import lib.Event;
