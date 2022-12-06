@@ -38,7 +38,7 @@ public class GameController {
     * This method is used to process incoming event.
     * @param event Incoming event
     */
-    public void processEvent(Event event) {
+    private void processEvent(Event event) {
       Logger.log("Event: " + event.getType().toString());
 
       switch (event.getType()) {
