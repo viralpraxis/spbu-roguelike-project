@@ -1,0 +1,43 @@
+plugins {
+    // Apply the application plugin to add support for building a CLI application in Java.
+    id 'application'
+    id "com.diffplug.spotless" version "6.11.0"
+}
+
+spotless {
+  enforceCheck false
+
+  java {
+    // importOrder()
+    removeUnusedImports()
+    formatAnnotations()
+    // googleJavaFormat()
+  }
+}
+
+repositories {
+    // Use Maven Central for resolving dependencies.
+    mavenCentral()
+}
+
+dependencies {
+    // Use JUnit Jupiter for testing.
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+
+    // This dependency is used by the application.
+    implementation 'com.googlecode.lanterna:lanterna:3.1.1'
+    implementation 'org.yaml:snakeyaml:1.21'
+    implementation 'junit:junit:4.11'
+    implementation 'org.mockito:mockito-core:3.2.4'
+    implementation 'com.github.stefanbirkner:system-lambda:1.2.1'
+}
+
+application {
+    // Define the main class for the application.
+    mainClass = 'core.GameInitializer'
+}
+
+test {
+    useJUnitPlatform()
+}

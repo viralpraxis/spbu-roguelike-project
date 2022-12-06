@@ -1,0 +1,81 @@
+levels:
+  - rooms:
+      - visible: true
+        x: 0
+        y: 0
+        size: 10
+        objects:
+          - type: door
+            x: 9
+            y: 2
+            target_x: 35
+            target_y: 15
+            target_room: 1
+          - type: item
+            x: 2
+            y: 2
+            name: Blade of the abyss
+      - visible: false
+        x: 30
+        y: 10
+        size: 10
+        objects:
+          - type: door
+            x: 39
+            y: 12
+            target_x: 5
+            target_y: 5
+            target_room: 0
+          - type: item
+            x: 37
+            y: 13
+            name: Sacrificial lamb
+          - type: mob
+            x: 38
+            y: 14
+            health: 200
+            power: 1
+            behavior: coward
+          - type: mob
+            x: 38
+            y: 13
+            health: 200
+            power: 1
+            behavior: aggressive
+    player:
+      x: 5
+      y: 5
+  - rooms:
+      - visible: true
+        x: 30
+        y: 0
+        size: 10
+        objects:
+          - type: door
+            x: 35
+            y: 0
+            target_x: 5
+            target_y: 25
+            target_room: 1
+          - type: item
+            x: 35
+            y: 5
+            name: Veil of the darkest night
+      - visible: false
+        x: 3
+        y: 20
+        size: 10
+        objects:
+          - type: door
+            x: 3
+            y: 22
+            target_x: 36
+            target_y: 6
+            target_room: 0
+          - type: item
+            x: 4
+            y: 23
+            name: Sacrificial lamb
+    player:
+      x: 33
+      y: 6
